@@ -11,17 +11,14 @@ public class Interactor : MonoBehaviour
     
     [SerializeField] Transform InteractorSource;
 
-    [SerializeField] Image cursor;
+    [SerializeField] Image bigCursor;
     [SerializeField] Image grabCursor;
-
-    private Vector3 normalCurorsScale;
 
     private void Start() {
 
-        cursor.enabled = false;
+        bigCursor.enabled = false;
         grabCursor.enabled = false;
 
-        normalCurorsScale = cursor.transform.localScale;
     }
 
     void Update() {
@@ -60,22 +57,17 @@ public class Interactor : MonoBehaviour
 
         if (interactObjTag == "Pickup") {
 
-            cursor.enabled = false;
             grabCursor.enabled = true;
         } else {
 
             grabCursor.enabled = false;
-            cursor.enabled = true;
-
-            cursor.transform.localScale *= 2;
+            bigCursor.enabled = true;
         }
     }
 
     private void ResetCursors() {
 
-        cursor.enabled = true;
         grabCursor.enabled = false;
-
-        cursor.transform.localScale = normalCurorsScale;
+        bigCursor.enabled = false;
     }
 }
