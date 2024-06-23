@@ -119,6 +119,7 @@ public class PlayerMovement : MonoBehaviour
     private void ObtainComponent() {
 
         playerCamera = Camera.main;
+        
         characterController = GetComponent<CharacterController>();
         audioSource = GetComponent<AudioSource>();
         anim = GetComponentInChildren<Animator>();
