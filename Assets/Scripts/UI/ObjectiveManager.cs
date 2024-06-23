@@ -7,7 +7,7 @@ public class ObjectiveManager : MonoBehaviour
 {
     public static ObjectiveManager Instance { get; private set; }
 
-    private Animator objectiveAnimator;
+    private Animator anim;
 
     private bool isShowingCurrentObjective = false;
 
@@ -44,16 +44,15 @@ public class ObjectiveManager : MonoBehaviour
 
     private IEnumerator ShowCurrentObjective() {
 
-        //TODO: Implementazione
-
         isShowingCurrentObjective = true;
-        objectiveText.gameObject.SetActive(true);
 
-        yield return new WaitForSeconds(1f);
+        anim.SetTrigger("Appear");
 
-        objectiveText.gameObject.SetActive(false);
+        yield return new WaitForSeconds(2f);
 
-        yield return new WaitForSeconds(1f);
+        anim.SetTrigger("Disappear");
+
+        yield return new WaitForSeconds(2f);
 
         isShowingCurrentObjective = false;
     }
@@ -71,6 +70,6 @@ public class ObjectiveManager : MonoBehaviour
 
     private void ObtainComponents() {
 
-        
+        anim = GameObject.FindGameObjectWithTag("Objective").GetComponent<Animator>();
     }
 }
