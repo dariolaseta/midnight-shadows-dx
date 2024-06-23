@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float defaultHeight = 2f;
     [SerializeField] float crouchHeight = 1f;
     [SerializeField] float crouchSpeed = 3f;
+    private float gravity = 10f;
     private float rotationX = 0;
 
     private bool isMoving = false;
@@ -99,6 +100,11 @@ public class PlayerMovement : MonoBehaviour
             runSpeed = 12f;
         }
 
+        if (!characterController.isGrounded) {
+            
+            moveDirection.y -= gravity * Time.deltaTime;
+        }
+
         characterController.Move(moveDirection * Time.deltaTime);
 
         if (canMove) {
@@ -119,7 +125,7 @@ public class PlayerMovement : MonoBehaviour
     private void ObtainComponent() {
 
         playerCamera = Camera.main;
-        
+
         characterController = GetComponent<CharacterController>();
         audioSource = GetComponent<AudioSource>();
         anim = GetComponentInChildren<Animator>();
