@@ -33,6 +33,7 @@ public class ObjectiveManager : MonoBehaviour
 
     private void HandleCurrentObjective() {
 
+        // TODO: Cambiare se decido di implementare tasti modificabili
         if (Input.GetKeyDown(KeyCode.O) && !isShowingCurrentObjective) {
 
             isShowingCurrentObjective = true;
