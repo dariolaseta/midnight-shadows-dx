@@ -44,51 +44,29 @@ public class PlayerMovement : MonoBehaviour
 
     private void MoveCharacter() {
 
-        if (isMoving) {
+        if (!canMove) return;
 
-            anim.SetFloat("Speed", 1f);
-        } else {
-
-            anim.SetFloat("Speed", 0);
-        }
-
-        Vector3 forward = transform.TransformDirection(Vector3.forward);
-        Vector3 right = transform.TransformDirection(Vector3.right);
-
+        float verticalInput = Input.GetAxis("Vertical");
+        float horizontalInput = Input.GetAxis("Horizontal");
         bool isRunning = Input.GetKey(KeyCode.LeftShift);
-        float curSpeedX = 0;
-        float curSpeedY = 0;
+        
+        float curSpeedX = isRunning ? runSpeed * verticalInput : walkSpeed * verticalInput;
+        float curSpeedY = isRunning ? runSpeed * horizontalInput : walkSpeed * horizontalInput;
 
-        if (canMove) {
+        Vector3 desiredMoveDirection = transform.TransformDirection(Vector3.forward) * curSpeedX + transform.TransformDirection(Vector3.right) * curSpeedY;
 
-            if (isRunning) {
-                curSpeedX = runSpeed * Input.GetAxis("Vertical");
-                curSpeedY = runSpeed * Input.GetAxis("Horizontal");
-            } else {
-
-                curSpeedX = walkSpeed * Input.GetAxis("Vertical");
-                curSpeedY = walkSpeed * Input.GetAxis("Horizontal");
-            }
+        if (desiredMoveDirection.sqrMagnitude > 0.01f) {
+            moveDirection.x = desiredMoveDirection.x;
+            moveDirection.z = desiredMoveDirection.z;
+            isMoving = true;
+        } else {
+            moveDirection.x = 0;
+            moveDirection.z = 0;
+            isMoving = false;
         }
 
-        float movementDirectionY = moveDirection.y;
-        moveDirection = (forward * curSpeedX) + (right * curSpeedY);
-
-        isMoving = moveDirection.sqrMagnitude > 0.01f;
-
-        if (isMoving && !isPlaying && audioSource.clip != null) {
-
-            audioSource.Play();
-            isPlaying = true;
-        } else if (!isMoving && isPlaying && audioSource.clip != null) {
-
-            audioSource.Stop();
-            isPlaying = false;
-        }
-
-        moveDirection.y = movementDirectionY;
-
-        if (Input.GetKey(KeyCode.C) && canMove) {
+        // Handle crouching
+        if (Input.GetKey(KeyCode.C)) {
 
             characterController.height = crouchHeight;
             walkSpeed = crouchSpeed;
@@ -100,21 +78,40 @@ public class PlayerMovement : MonoBehaviour
             runSpeed = 12f;
         }
 
+        // Apply gravity
         if (!characterController.isGrounded) {
             
             moveDirection.y -= gravity * Time.deltaTime;
+        } else {
+
+            moveDirection.y = 0;
         }
 
         characterController.Move(moveDirection * Time.deltaTime);
 
-        if (canMove) {
+        // Handle rotation
+        rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
+        rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
+        playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
+        transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
 
-            rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
-            rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
-            playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
-            transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
+        // Update animation and audio
+        if (isMoving) {
+            
+            anim.SetFloat("Speed", 1f);
+            if (!isPlaying && audioSource.clip != null) {
+                audioSource.Play();
+                isPlaying = true;
+            }
+        } else {
+            anim.SetFloat("Speed", 0);
+            if (isPlaying && audioSource.clip != null) {
+                audioSource.Stop();
+                isPlaying = false;
+            }
         }
     }
+
 
     private void Init() {
 
