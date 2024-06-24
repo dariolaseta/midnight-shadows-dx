@@ -17214,6 +17214,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 543450653477500263}
+  - component: {fileID: 919132149285302238}
+  - component: {fileID: 919132149285302239}
   m_Layer: 0
   m_Name: lightswitch
   m_TagString: Untagged
@@ -17221,6 +17223,42 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!65 &919132149285302238
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132149285302237}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.1, y: 2, z: 1.99}
+  m_Center: {x: -0.06, y: 1.76, z: 0}
+--- !u!114 &919132149285302239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132149285302237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55cb73d987bb3bd42bca2fe9890fcc8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightOn: 0
+  pointLight: {fileID: 2072470167}
+  lightOnMaterial: {fileID: 2100000, guid: b4418e9ba62f1db4f88d00ca5f596eab, type: 2}
 --- !u!1 &1275733188421865555
 GameObject:
   m_ObjectHideFlags: 0
@@ -17232,8 +17270,6 @@ GameObject:
   - component: {fileID: 612729241047694810}
   - component: {fileID: 8457629864019342926}
   - component: {fileID: 8302894711555040297}
-  - component: {fileID: 8457629864019342928}
-  - component: {fileID: 8457629864019342927}
   m_Layer: 0
   m_Name: LightSwitchCover
   m_TagString: Untagged
@@ -17631,6 +17667,7 @@ GameObject:
   - component: {fileID: 6609023941763041595}
   - component: {fileID: 3966832554261908985}
   - component: {fileID: 5426059713025667487}
+  - component: {fileID: 7588071779627851833}
   m_Layer: 0
   m_Name: LightSwitch
   m_TagString: Untagged
@@ -17638,6 +17675,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!95 &7588071779627851833
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7588071779627851832}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 07a2283f81184c942a123bfb2be20c83, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &7967972782012229989
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17761,42 +17819,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1275733188421865555}
   m_Mesh: {fileID: 8112563401263466859, guid: 31af454c4450e554bbb4e9f70586e6cc, type: 3}
---- !u!65 &8457629864019342927
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1275733188421865555}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.020000005, y: 0.020000001, z: 0.019999998}
-  m_Center: {x: 0, y: 0, z: -0.000000014901161}
---- !u!114 &8457629864019342928
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1275733188421865555}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55cb73d987bb3bd42bca2fe9890fcc8f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lightOn: 0
-  pointLight: {fileID: 2072470167}
-  lightOnMaterial: {fileID: 2100000, guid: b4418e9ba62f1db4f88d00ca5f596eab, type: 2}
 --- !u!23 &8808423956408572779
 MeshRenderer:
   m_ObjectHideFlags: 0

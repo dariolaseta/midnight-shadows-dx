@@ -18,13 +18,7 @@ public class LightSwitch : MonoBehaviour, IInteractable
 
     public void Interact() {
         
-        //TODO: Add animation & fix light
-        lightOn = !lightOn;
-        pointLight.enabled = lightOn;
-
-        Material[] materials = meshRenderer.materials;
-        materials[0] = lightOn ? lightOnMaterial : lightOffMaterial;
-        meshRenderer.materials = materials;
+        InteractWithLightSwitch();
     }
 
     void Awake() {
@@ -39,7 +33,7 @@ public class LightSwitch : MonoBehaviour, IInteractable
 
     private void ObtainComponents() {
 
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
 
         meshRenderer = pointLight.GetComponentInParent<MeshRenderer>();
     }
@@ -47,5 +41,17 @@ public class LightSwitch : MonoBehaviour, IInteractable
     private void Init() {
 
         lightOffMaterial = meshRenderer.materials[0];
+    }
+
+    private void InteractWithLightSwitch() {
+
+        lightOn = !lightOn;
+        pointLight.enabled = lightOn;
+
+        anim.SetBool("isOn", lightOn);
+
+        Material[] materials = meshRenderer.materials;
+        materials[0] = lightOn ? lightOnMaterial : lightOffMaterial;
+        meshRenderer.materials = materials;
     }
 }
