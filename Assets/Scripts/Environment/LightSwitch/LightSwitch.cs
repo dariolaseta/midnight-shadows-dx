@@ -8,23 +8,23 @@ public class LightSwitch : MonoBehaviour, IInteractable
 
     [SerializeField] Light pointLight;
 
+    [SerializeField] Material lightOnMaterial;
+
+    private Material lightOffMaterial;
+
     private Animator anim;
+
+    private MeshRenderer meshRenderer;
 
     public void Interact() {
         
         //TODO: Add animation & fix light
+        lightOn = !lightOn;
+        pointLight.enabled = lightOn;
 
-        if (!lightOn) {
-
-            pointLight.enabled = !lightOn;
-
-            lightOn = true;
-        } else {
-
-            pointLight.enabled = !lightOn;
-
-            lightOn = false;
-        }
+        Material[] materials = meshRenderer.materials;
+        materials[0] = lightOn ? lightOnMaterial : lightOffMaterial;
+        meshRenderer.materials = materials;
     }
 
     void Awake() {
@@ -32,8 +32,20 @@ public class LightSwitch : MonoBehaviour, IInteractable
         ObtainComponents();
     }
 
+    void Start() {
+        
+        Init();
+    }
+
     private void ObtainComponents() {
 
         anim = GetComponent<Animator>();
+
+        meshRenderer = pointLight.GetComponentInParent<MeshRenderer>();
+    }
+
+    private void Init() {
+
+        lightOffMaterial = meshRenderer.materials[0];
     }
 }

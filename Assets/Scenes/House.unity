@@ -17796,6 +17796,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lightOn: 0
   pointLight: {fileID: 2072470167}
+  lightOnMaterial: {fileID: 2100000, guid: b4418e9ba62f1db4f88d00ca5f596eab, type: 2}
 --- !u!23 &8808423956408572779
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -17858,7 +17859,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3934430235967861785, guid: e3f16d4dc0744ce4a81f6f93e0b8b9fb, type: 3}
+  - {fileID: 2100000, guid: 15e6168b341c74e4aa383f0bda494918, type: 2}
   - {fileID: -7780041693528198342, guid: e3f16d4dc0744ce4a81f6f93e0b8b9fb, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
