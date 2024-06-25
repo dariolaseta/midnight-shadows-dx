@@ -24,11 +24,7 @@ public class Door : MonoBehaviour, IInteractable
 
         if (isOpening) yield break;
 
-        anim.SetTrigger("Open");
-
         isOpening = true;
-
-        yield return new WaitForSeconds(2f);
 
         if (!isOpen) {
 
@@ -41,7 +37,6 @@ public class Door : MonoBehaviour, IInteractable
             isOpening = false;
         } else {
 
-            //TODO: Fix animazione chiusura porta
             isOpen = false;
 
             anim.SetTrigger("CloseDoor");
