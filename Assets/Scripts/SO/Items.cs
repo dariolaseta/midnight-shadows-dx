@@ -9,14 +9,14 @@ public class Items : ScriptableObject
     [SerializeField] string itemName;
     [SerializeField] string itemDescription;
 
-    [SerializeField] Image itemImage;
+    [SerializeField] Sprite itemImage;
 
     [SerializeField] int quantity;
 
     public string ItemName => itemName;
     public string ItemDescription => itemDescription;
 
-    public Image ItemImage => itemImage;
+    public Sprite ItemImage => itemImage;
 
     public int Quantity => quantity;
 }
