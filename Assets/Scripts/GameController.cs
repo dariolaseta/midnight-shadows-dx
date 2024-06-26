@@ -68,7 +68,7 @@ public class GameController : MonoBehaviour
 
     private void OpenInventory() {
 
-        if (Input.GetKeyDown(KeyCode.Tab) && !isInventoryOpen) {
+        if (Input.GetKeyDown(KeyCode.Tab) && !isInventoryOpen && state == GameState.FREEROAM) {
             
             inventoryScreen.SetActive(true);
 
@@ -77,6 +77,18 @@ public class GameController : MonoBehaviour
             ChangeState(GameState.INVENTORY);
 
             isInventoryOpen = true;
+            Inventory.Instance.ListItems();
+        } else if (Input.GetKeyDown(KeyCode.Tab) && isInventoryOpen && state == GameState.INVENTORY) {
+
+            Inventory.Instance.CleanContentItem();
+
+            inventoryScreen.SetActive(false);
+
+            DisableCursor();
+
+            GoToPrevState();
+
+            isInventoryOpen = false;
         }
     }
 

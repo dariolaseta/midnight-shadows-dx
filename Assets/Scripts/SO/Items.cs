@@ -19,4 +19,9 @@ public class Items : ScriptableObject
     public Sprite ItemImage => itemImage;
 
     public int Quantity => quantity;
+
+    public enum ItemType {
+
+        Shrimp,
+    }
 }
