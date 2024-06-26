@@ -39,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
     
     private void Update() {
         
-        MoveCharacter();
+        CheckForState(GameController.Instance.State);
     }
 
     private void MoveCharacter() {
@@ -126,5 +126,18 @@ public class PlayerMovement : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         audioSource = GetComponent<AudioSource>();
         anim = GetComponentInChildren<Animator>();
+    }
+
+    private void CheckForState(GameState state) {
+
+        // TODO: Add other states
+        switch (state) {
+            
+            case GameState.FREEROAM:
+                MoveCharacter();
+                break;
+            
+            
+        }
     }
 }
