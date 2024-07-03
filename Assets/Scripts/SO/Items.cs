@@ -11,14 +11,14 @@ public class Items : ScriptableObject
 
     [SerializeField] Sprite itemImage;
 
-    [SerializeField] int quantity;
+    [SerializeField] GameObject model;
 
     public string ItemName => itemName;
     public string ItemDescription => itemDescription;
 
     public Sprite ItemImage => itemImage;
 
-    public int Quantity => quantity;
+    public GameObject Model => model;
 
     public enum ItemType {
 
