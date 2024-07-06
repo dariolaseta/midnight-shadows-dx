@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
     public static GameController Instance { get; private set; }
 
     [SerializeField] GameObject inventoryScreen;
+    [SerializeField] GameObject pauseScreen;
 
     private Animator playerAnim;
 
@@ -41,6 +42,8 @@ public class GameController : MonoBehaviour
     void Update() {
 
         StartCoroutine(OpenInventory());
+
+        HandlePauseMenu();
     }
 
     private void CreateInstance() {
@@ -124,5 +127,34 @@ public class GameController : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    private void HandlePauseMenu() {
+
+        if (state == GameState.FREEROAM && Input.GetKeyDown(KeyCode.Escape)) {
+
+            Pause();
+        } else if (state == GameState.PAUSE && Input.GetKeyDown(KeyCode.Escape)) {
+
+            Resume();
+        }
+    }
+
+    public void Pause() {
+
+        state = GameState.PAUSE;
+
+        pauseScreen.SetActive(true);
+
+        EnableCursor();
+    }
+
+    public void Resume() {
+
+        GoToPrevState();
+
+        pauseScreen.SetActive(false);
+
+        DisableCursor();
     }
 }
