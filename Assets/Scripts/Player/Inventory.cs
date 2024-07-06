@@ -19,7 +19,7 @@ public class Inventory : MonoBehaviour
 
         inventory.Add(item);
 
-        //TODO: Script per aggiornare UI
+        ObtainItemUI.Instance.ShowObtainingItemUI(item.ItemImage, item.ItemDescription);
     }
 
     public void RemoveItem(Items item) {

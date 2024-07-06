@@ -10,10 +10,6 @@ public class ItemBehavior : MonoBehaviour, IInteractable
 
         Inventory.Instance.AddNewItem(item);
 
-        // TODO: Add dialogue for item obtain
-
-        Debug.Log(item.ItemName + " added to inventory");
-
         gameObject.SetActive(false);
     }
 }
