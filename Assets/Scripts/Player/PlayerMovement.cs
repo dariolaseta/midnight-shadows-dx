@@ -138,7 +138,7 @@ public class PlayerMovement : MonoBehaviour
                 break;
             
             case GameState.OBTAIN_ITEM:
-                GameController.Instance.CloseItemUI();
+                ObtainItemUI.Instance.CloseItemUI();
                 break;
         }
     }

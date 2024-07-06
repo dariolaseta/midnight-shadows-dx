@@ -40,4 +40,14 @@ public class ObtainItemUI : MonoBehaviour
 
         Instance = this;
     }
+
+    public void CloseItemUI() {
+
+        if (Input.GetKeyDown(KeyCode.F)) {
+
+            obtainItemObj.SetActive(false);
+
+            GameController.Instance.GoToPrevState();
+        }
+    }
 }

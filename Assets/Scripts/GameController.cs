@@ -9,7 +9,6 @@ public class GameController : MonoBehaviour
     public static GameController Instance { get; private set; }
 
     [SerializeField] GameObject inventoryScreen;
-    [SerializeField] GameObject obtainItemOBJ;
 
     private bool isInventoryOpen = false;
 
@@ -103,15 +102,5 @@ public class GameController : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-    }
-
-    public void CloseItemUI() {
-
-        if (Input.GetKeyDown(KeyCode.F)) {
-
-            obtainItemOBJ.SetActive(false);
-
-            GoToPrevState();
-        }
     }
 }
