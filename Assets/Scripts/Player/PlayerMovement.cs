@@ -130,7 +130,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void CheckForState(GameState state) {
 
-        // TODO: Add other states
         switch (state) {
             
             case GameState.FREEROAM:

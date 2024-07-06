@@ -10,6 +10,8 @@ public class GameController : MonoBehaviour
 
     [SerializeField] GameObject inventoryScreen;
 
+    private Animator playerAnim;
+
     private bool isInventoryOpen = false;
 
     // DEBUG
@@ -25,6 +27,8 @@ public class GameController : MonoBehaviour
 
         CreateInstance();
 
+        ObtainComponents();
+
         //DEBUG
         GetProjectVersion();
     }
@@ -36,7 +40,7 @@ public class GameController : MonoBehaviour
 
     void Update() {
 
-        OpenInventory();
+        StartCoroutine(OpenInventory());
     }
 
     private void CreateInstance() {
@@ -48,6 +52,11 @@ public class GameController : MonoBehaviour
         }
 
         Instance = this;
+    }
+
+    private void ObtainComponents() {
+
+        playerAnim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
     }
 
     private void GetProjectVersion() {
@@ -66,23 +75,36 @@ public class GameController : MonoBehaviour
         state = prevState;
     }
 
-    private void OpenInventory() {
+    private IEnumerator OpenInventory() {
 
         if (Input.GetKeyDown(KeyCode.Tab) && !isInventoryOpen && state == GameState.FREEROAM) {
             
+            playerAnim.enabled = true;
+
+            ChangeState(GameState.INVENTORY);
+
+            playerAnim.SetTrigger("OpenBackpack");
+
+            yield return new WaitForSeconds(1.5f);
+
             inventoryScreen.SetActive(true);
 
             EnableCursor();
 
-            ChangeState(GameState.INVENTORY);
-
             isInventoryOpen = true;
+            
             Inventory.Instance.ListItems();
         } else if (Input.GetKeyDown(KeyCode.Tab) && isInventoryOpen && state == GameState.INVENTORY) {
 
-            Inventory.Instance.CleanContentItem();
+            playerAnim.SetTrigger("CloseBackpack");
 
             inventoryScreen.SetActive(false);
+
+            yield return new WaitForSeconds(1.5f);
+
+            playerAnim.enabled = false;
+
+            Inventory.Instance.CleanContentItem();
 
             DisableCursor();
 
