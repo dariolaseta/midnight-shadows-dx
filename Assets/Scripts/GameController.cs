@@ -77,7 +77,7 @@ public class GameController : MonoBehaviour
 
     private IEnumerator OpenInventory() {
 
-        if (Input.GetKeyDown(KeyCode.Tab) && !isInventoryOpen && state == GameState.FREEROAM) {
+        if (Input.GetKeyDown(KeyCode.Tab) && !isInventoryOpen && state == GameState.FREEROAM && Flags.Instance.IsFlagTrue("hasBackpack")) {
             
             playerAnim.enabled = true;
 
@@ -94,7 +94,7 @@ public class GameController : MonoBehaviour
             isInventoryOpen = true;
             
             Inventory.Instance.ListItems();
-        } else if (Input.GetKeyDown(KeyCode.Tab) && isInventoryOpen && state == GameState.INVENTORY) {
+        } else if (Input.GetKeyDown(KeyCode.Tab) && isInventoryOpen && state == GameState.INVENTORY && Flags.Instance.IsFlagTrue("hasBackpack")) {
 
             playerAnim.SetTrigger("CloseBackpack");
 
