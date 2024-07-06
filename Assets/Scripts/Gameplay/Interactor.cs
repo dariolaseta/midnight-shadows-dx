@@ -37,7 +37,7 @@ public class Interactor : MonoBehaviour
                 UpdateCursor(hitInfo.collider.gameObject.tag);
 
                 // TODO: Cambiare nel caso volessi mettere tasti configurabili
-                if (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0)) {
+                if ((Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0)) && GameController.Instance.State == GameState.FREEROAM) {
 
                     interactObj.Interact();
                 }
