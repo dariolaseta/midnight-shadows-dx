@@ -29,6 +29,7 @@ public class Flags : MonoBehaviour
     private void InitializeFlags() {
 
         flags["hasBackpack"] = false;
+        flags["hasTorch"] = false;
     }
 
     public bool GetFlag(string flagName) {
