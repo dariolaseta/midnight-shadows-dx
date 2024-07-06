@@ -15,14 +15,16 @@ public class GameController : MonoBehaviour
 
     private bool isInventoryOpen = false;
 
-    // DEBUG
-    [SerializeField] TMP_Text versionTxt;
-
-    private string buildStatus = "Alpha v.";
+    private AudioSource playerAudioSource;
 
     private GameState state = GameState.FREEROAM;
     private GameState prevState;
     public GameState State => state;
+
+    // DEBUG
+    [SerializeField] TMP_Text versionTxt;
+
+    private string buildStatus = "Alpha v.";
 
     void Awake() {
 
@@ -60,6 +62,7 @@ public class GameController : MonoBehaviour
     private void ObtainComponents() {
 
         playerAnim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
+        playerAudioSource = playerAnim.gameObject.GetComponent<AudioSource>();
     }
 
     private void GetProjectVersion() {
@@ -82,6 +85,8 @@ public class GameController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Tab) && !isInventoryOpen && state == GameState.FREEROAM && Flags.Instance.IsFlagTrue("hasBackpack")) {
             
+            StopPlayerSounds();
+
             playerAnim.enabled = true;
 
             ChangeState(GameState.INVENTORY);
@@ -142,6 +147,8 @@ public class GameController : MonoBehaviour
 
     public void Pause() {
 
+        StopPlayerSounds();
+
         state = GameState.PAUSE;
 
         pauseScreen.SetActive(true);
@@ -156,5 +163,10 @@ public class GameController : MonoBehaviour
         pauseScreen.SetActive(false);
 
         DisableCursor();
+    }
+
+    public void StopPlayerSounds() {
+
+        playerAudioSource.Stop();
     }
 }
