@@ -64,7 +64,7 @@ public class Inventory : MonoBehaviour
 
         if (Instance != null && Instance != this) {
 
-            Destroy(gameObject);
+            Destroy(this);
             return;
         }
 
