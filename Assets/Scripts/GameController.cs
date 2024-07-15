@@ -24,7 +24,7 @@ public class GameController : MonoBehaviour
     // DEBUG
     [SerializeField] TMP_Text versionTxt;
 
-    private string buildStatus = "Alpha v.";
+    private readonly string buildStatus = "Alpha v.";
 
     void Awake() {
 
