@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public enum GameState { FREEROAM, DIALOG, PAUSE, INVENTORY, CUTSCENE, OBTAIN_ITEM }
+public enum GameState { FREEROAM, DIALOG, PAUSE, INVENTORY, CUTSCENE, OBTAIN_ITEM, SMARTPHONE }
 public class GameController : MonoBehaviour
 {
     public static GameController Instance { get; private set; }
@@ -12,9 +12,11 @@ public class GameController : MonoBehaviour
     [SerializeField] GameObject pauseScreen;
 
     private Animator playerAnim;
+    private Animator smartphoneAnim;
     private Animator[] animators;
 
     private bool isInventoryOpen = false;
+    private bool isSmartphoneON = false;
 
     private AudioSource playerAudioSource;
 
@@ -46,6 +48,8 @@ public class GameController : MonoBehaviour
 
         StartCoroutine(OpenInventory());
 
+        SmartphoneBeheavior();
+
         HandlePauseMenu();
     }
 
@@ -63,6 +67,8 @@ public class GameController : MonoBehaviour
     private void ObtainComponents() {
 
         playerAnim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
+        smartphoneAnim = GameObject.FindGameObjectWithTag("Smartphone").GetComponent<Animator>();
+        smartphoneAnim.gameObject.SetActive(false);
         playerAudioSource = playerAnim.gameObject.GetComponent<AudioSource>();
     }
 
@@ -80,6 +86,23 @@ public class GameController : MonoBehaviour
     public void GoToPrevState() {
 
         state = prevState;
+    }
+
+    private void SmartphoneBeheavior() {
+
+        if (Input.GetKeyDown(KeyCode.M) && state == GameState.FREEROAM && Flags.Instance.IsFlagTrue("hasSmartphone") && !isSmartphoneON) {
+
+            smartphoneAnim.gameObject.SetActive(true);
+
+            smartphoneAnim.SetTrigger("ON");
+
+            isSmartphoneON = true;
+        } else if (Input.GetKeyDown(KeyCode.M) && state == GameState.FREEROAM && Flags.Instance.IsFlagTrue("hasSmartphone") && isSmartphoneON) {
+
+            smartphoneAnim.SetTrigger("Close");
+
+            isSmartphoneON = false;
+        }
     }
 
     private IEnumerator OpenInventory() {

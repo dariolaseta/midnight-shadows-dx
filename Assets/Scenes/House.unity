@@ -19276,7 +19276,7 @@ Transform:
   m_GameObject: {fileID: 919132149356660038}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -0.49300003, y: -0.25999993, z: 0.92700005}
+  m_LocalPosition: {x: -0.493, y: -1.182, z: 0.927}
   m_LocalScale: {x: 60.225, y: 60.225, z: 60.225}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -19457,13 +19457,14 @@ GameObject:
   - component: {fileID: 543450653364314108}
   - component: {fileID: 3469287837280817241}
   - component: {fileID: 1711813855432418451}
+  - component: {fileID: 3469287837280817242}
   m_Layer: 0
   m_Name: Smartphone
-  m_TagString: Untagged
+  m_TagString: Smartphone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &922979042502037217
 GameObject:
   m_ObjectHideFlags: 0
@@ -19658,7 +19659,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132149356660038}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -20174,6 +20175,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132149356660038}
   m_Mesh: {fileID: 2621444598493108001, guid: a85a934f087106c44a5978a7a3a72fac, type: 3}
+--- !u!95 &3469287837280817242
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132149356660038}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5b2dc686059000d4c8b6833d2beb8e2b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &3585004282983322308
 Transform:
   m_ObjectHideFlags: 0
@@ -20595,10 +20617,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3832658820387560620}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53e411fec260574428910e8a829bb7ea, type: 3}
+  m_Script: {fileID: 11500000, guid: e66fdad885d1f8f4eb6940a4bdba818e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: d73e3bb792afa044698ce6d76db481e8, type: 2}
 --- !u!33 &4638003028186829688
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -21505,7 +21526,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 967237385701392706}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
