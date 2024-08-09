@@ -9,6 +9,7 @@ TagManager:
   - Interactable
   - Objective
   - Smartphone
+  - StoryItemUI
   layers:
   - Default
   - TransparentFX

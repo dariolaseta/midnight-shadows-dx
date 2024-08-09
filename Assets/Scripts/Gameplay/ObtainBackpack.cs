@@ -6,6 +6,8 @@ public class ObtainBackpack : MonoBehaviour, IInteractable
 {
     [SerializeField] GameObject playerBackPack;
 
+    [SerializeField] Items item;
+
     public void Interact() {
         
         Flags.Instance.SetFlags("hasBackpack", true);
@@ -14,6 +16,8 @@ public class ObtainBackpack : MonoBehaviour, IInteractable
 
         //TODO: Add tutorial
 
-        gameObject.SetActive(false);
+        StartCoroutine(StoryItemTextBehaviour.Instance.ShowStoryItemObtain(item, gameObject));
+
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
     }
 }
