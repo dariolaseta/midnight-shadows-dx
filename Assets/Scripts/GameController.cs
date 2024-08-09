@@ -182,7 +182,7 @@ public class GameController : MonoBehaviour
 
     public void Pause() {
 
-        StopAnimators();
+        SetAnimatorSpeed(0);
 
         StopPlayerSounds();
 
@@ -201,7 +201,7 @@ public class GameController : MonoBehaviour
 
         DisableCursor();
 
-        ResumeAnimators();
+        SetAnimatorSpeed(1);
     }
 
     public void StopPlayerSounds() {
@@ -209,23 +209,13 @@ public class GameController : MonoBehaviour
         playerAudioSource.Stop();
     }
 
-    private void StopAnimators() {
-        
-        GetAllAnimators();
-
-        foreach (Animator anim in animators) {
-
-            anim.speed = 0;
-        }
-    }
-
-    private void ResumeAnimators() {
+    private void SetAnimatorSpeed(int value) {
 
         GetAllAnimators();
 
         foreach (Animator anim in animators) {
 
-            anim.speed = 1;
+            anim.speed = value;
         }
     }
 
