@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
     [SerializeField] GameObject pauseScreen;
 
     private Animator playerAnim;
+    private Animator[] animators;
 
     private bool isInventoryOpen = false;
 
@@ -147,6 +148,8 @@ public class GameController : MonoBehaviour
 
     public void Pause() {
 
+        StopAnimators();
+
         StopPlayerSounds();
 
         state = GameState.PAUSE;
@@ -163,10 +166,38 @@ public class GameController : MonoBehaviour
         pauseScreen.SetActive(false);
 
         DisableCursor();
+
+        ResumeAnimators();
     }
 
     public void StopPlayerSounds() {
 
         playerAudioSource.Stop();
+    }
+
+    private void StopAnimators() {
+        
+        GetAllAnimators();
+
+        foreach (Animator anim in animators) {
+
+            anim.speed = 0;
+        }
+    }
+
+    private void ResumeAnimators() {
+
+        GetAllAnimators();
+
+        foreach (Animator anim in animators) {
+
+            anim.speed = 1;
+        }
+    }
+
+    private void GetAllAnimators() {
+
+        animators = FindObjectsOfType<Animator>();
+
     }
 }
