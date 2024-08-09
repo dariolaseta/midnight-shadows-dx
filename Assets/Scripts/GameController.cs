@@ -11,6 +11,8 @@ public class GameController : MonoBehaviour
     [SerializeField] GameObject inventoryScreen;
     [SerializeField] GameObject pauseScreen;
 
+    private Light smartphoneLight;
+
     private Animator playerAnim;
     private Animator smartphoneAnim;
     private Animator[] animators;
@@ -68,6 +70,8 @@ public class GameController : MonoBehaviour
 
         playerAnim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
         smartphoneAnim = GameObject.FindGameObjectWithTag("Smartphone").GetComponent<Animator>();
+        smartphoneLight = smartphoneAnim.GetComponentInChildren<Light>();
+        smartphoneLight.enabled = false;
         smartphoneAnim.gameObject.SetActive(false);
         playerAudioSource = playerAnim.gameObject.GetComponent<AudioSource>();
     }
@@ -90,6 +94,8 @@ public class GameController : MonoBehaviour
 
     private void SmartphoneBeheavior() {
 
+        if (!Flags.Instance.IsFlagTrue("hasSmartphone")) return;
+
         if (Input.GetKeyDown(KeyCode.M) && state == GameState.FREEROAM && Flags.Instance.IsFlagTrue("hasSmartphone") && !isSmartphoneON) {
 
             smartphoneAnim.gameObject.SetActive(true);
@@ -102,6 +108,11 @@ public class GameController : MonoBehaviour
             smartphoneAnim.SetTrigger("Close");
 
             isSmartphoneON = false;
+        }
+
+        if (isSmartphoneON && Input.GetKeyDown(KeyCode.F) && state == GameState.FREEROAM) {
+
+            smartphoneLight.enabled = !smartphoneLight.enabled;
         }
     }
 
@@ -221,6 +232,5 @@ public class GameController : MonoBehaviour
     private void GetAllAnimators() {
 
         animators = FindObjectsOfType<Animator>();
-
     }
 }
