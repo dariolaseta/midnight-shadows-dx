@@ -13957,8 +13957,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c9406bbc14469049bd60344f36f596b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smooth: 8
-  swayMultiplier: 2
+  smooth: 15
+  swayMultiplier: 6
 --- !u!1 &1466974400
 GameObject:
   m_ObjectHideFlags: 0
