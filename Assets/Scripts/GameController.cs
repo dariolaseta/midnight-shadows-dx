@@ -104,7 +104,8 @@ public class GameController : MonoBehaviour
 
             isSmartphoneON = true;
         } else if (Input.GetKeyDown(KeyCode.M) && state == GameState.FREEROAM && Flags.Instance.IsFlagTrue("hasSmartphone") && isSmartphoneON) {
-
+            
+            smartphoneLight.enabled = false;
             smartphoneAnim.SetTrigger("Close");
 
             isSmartphoneON = false;
