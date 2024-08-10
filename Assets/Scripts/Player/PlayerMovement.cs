@@ -13,8 +13,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float defaultHeight = 2f;
     [SerializeField] float crouchHeight = 1f;
     [SerializeField] float crouchSpeed = 3f;
+
     private float gravity = 10f;
     private float rotationX = 0;
+    private float startWalkingSpeed;
+    private float startRunningSpeed;
 
     private bool isMoving = false;
     private bool isPlaying = false;
@@ -74,8 +77,8 @@ public class PlayerMovement : MonoBehaviour
         } else {
 
             characterController.height = defaultHeight;
-            walkSpeed = 6f;
-            runSpeed = 12f;
+            walkSpeed = startWalkingSpeed;
+            runSpeed = startRunningSpeed;
         }
 
         // Apply gravity
@@ -114,6 +117,9 @@ public class PlayerMovement : MonoBehaviour
 
 
     private void Init() {
+
+        startWalkingSpeed = walkSpeed;
+        startRunningSpeed = runSpeed;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;

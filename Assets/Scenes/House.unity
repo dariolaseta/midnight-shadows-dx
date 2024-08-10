@@ -14813,8 +14813,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18be72264c68de944a49e29151993805, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 6
-  runSpeed: 12
+  walkSpeed: 4
+  runSpeed: 7
   lookSpeed: 2
   lookXLimit: 45
   defaultHeight: 2
