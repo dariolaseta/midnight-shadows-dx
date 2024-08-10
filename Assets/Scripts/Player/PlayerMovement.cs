@@ -113,6 +113,11 @@ public class PlayerMovement : MonoBehaviour
                 isPlaying = false;
             }
         }
+
+        if (isRunning) 
+            CamerabobSystem.Instance.SetBobVelocity(0.008f, 20.0f, 80.0f);
+        else
+            CamerabobSystem.Instance.ResetBobVelocity();
     }
 
 

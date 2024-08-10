@@ -8,11 +8,32 @@ public class CamerabobSystem : MonoBehaviour
     [SerializeField, Range(1f, 30f)] float frequency = 10.0f;
     [SerializeField, Range(10f, 100f)] float smooth = 10.0f;
 
+    private float startAmount;
+    private float startFrequency;
+    private float startSmooth;
+
     private Vector3 startPos;
+
+    public static CamerabobSystem Instance { get; private set; }
+
+    void Awake() {
+
+        if (Instance != null && Instance != this) {
+
+            Destroy(this);
+            return;
+        }
+
+        Instance = this;
+    }
 
     void Start() {
         
         startPos = transform.localPosition;
+
+        startAmount = amount;
+        startFrequency = frequency;
+        startSmooth = smooth;
     }
 
     void Update() {
@@ -43,5 +64,19 @@ public class CamerabobSystem : MonoBehaviour
         if (transform.localPosition == startPos) return;
 
         transform.localPosition = Vector3.Lerp(transform.localPosition, startPos, 1 * Time.deltaTime);
+    }
+
+    public void SetBobVelocity(float amount, float frequency, float smooth) {
+
+        this.amount = amount;
+        this.frequency = frequency;
+        this.smooth = smooth;
+    }
+
+    public void ResetBobVelocity() {
+
+        amount = startAmount;
+        frequency = startFrequency;
+        smooth = startSmooth;
     }
 }
