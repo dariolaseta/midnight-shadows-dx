@@ -20,7 +20,9 @@ public class GameController : MonoBehaviour
     private bool isInventoryOpen = false;
     private bool isSmartphoneON = false;
 
-    private AudioSource playerAudioSource;
+    private AudioSource[] audioSources;
+
+    private ParticleSystem[] particleSystems;
 
     private GameState state = GameState.FREEROAM;
     private GameState prevState;
@@ -73,7 +75,6 @@ public class GameController : MonoBehaviour
         smartphoneLight = smartphoneAnim.GetComponentInChildren<Light>();
         smartphoneLight.enabled = false;
         smartphoneAnim.gameObject.SetActive(false);
-        playerAudioSource = playerAnim.gameObject.GetComponent<AudioSource>();
     }
 
     private void GetProjectVersion() {
@@ -120,8 +121,6 @@ public class GameController : MonoBehaviour
     private IEnumerator OpenInventory() {
 
         if (Input.GetKeyDown(KeyCode.Tab) && !isInventoryOpen && state == GameState.FREEROAM && Flags.Instance.IsFlagTrue("hasBackpack")) {
-            
-            StopPlayerSounds();
 
             playerAnim.enabled = true;
 
@@ -183,9 +182,11 @@ public class GameController : MonoBehaviour
 
     public void Pause() {
 
+        SetParticleBehavior(true);
+
         SetAnimatorSpeed(0);
 
-        StopPlayerSounds();
+        SetSoundBehavior(true);
 
         state = GameState.PAUSE;
 
@@ -203,11 +204,36 @@ public class GameController : MonoBehaviour
         DisableCursor();
 
         SetAnimatorSpeed(1);
+
+        SetParticleBehavior(false);
+
+        SetSoundBehavior(false);
     }
 
-    public void StopPlayerSounds() {
+    private void SetParticleBehavior(bool isPaused) {
 
-        playerAudioSource.Stop();
+        particleSystems = FindObjectsOfType<ParticleSystem>();
+
+        foreach (ParticleSystem particle in particleSystems) {
+
+            if (!isPaused)
+                particle.Play();
+            else
+                particle.Pause();
+        }
+    }
+
+    public void SetSoundBehavior(bool isPaused) {
+
+        audioSources = FindObjectsOfType<AudioSource>();
+
+        foreach (AudioSource audioSource in audioSources) {
+
+            if (!isPaused)
+                audioSource.Play();
+            else
+                audioSource.Pause();
+        }
     }
 
     private void SetAnimatorSpeed(int value) {
