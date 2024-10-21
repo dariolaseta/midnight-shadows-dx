@@ -81,7 +81,7 @@ public class Inventory : MonoBehaviour
 
         foreach(Transform item in itemContent) {
 
-            Destroy(item.gameObject);
+            item.gameObject.SetActive(false);
         }
     }
 
