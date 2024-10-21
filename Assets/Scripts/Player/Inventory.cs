@@ -11,6 +11,10 @@ public class Inventory : MonoBehaviour
     [SerializeField] Transform itemContent;
 
     [SerializeField] GameObject inventoryItem;
+
+    [SerializeField] int poolSize = 20;
+
+    private List<GameObject> itemPool = new List<GameObject>();
     
 
     public static Inventory Instance { get; private set; }
@@ -33,17 +37,43 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void ListItems() {
+    private void GeneratePool() {
 
-        foreach(var item in inventory) {
+        for (int i = 0; i < poolSize; i++) {
 
             GameObject obj = Instantiate(inventoryItem, itemContent);
+            obj.SetActive(false);
+            itemPool.Add(obj);
+        }
+    }
+
+    public void ListItems() {
+
+        foreach(var obj in itemPool) {
+
+            obj.SetActive(false);
+        }
+
+        for (int i = 0; i < inventory.Count; i++) {
+
+            GameObject obj;
+
+            if (i < itemPool.Count) {
+
+                obj = itemPool[i];
+            } else {
+
+                obj = Instantiate(inventoryItem, itemContent);
+                itemPool.Add(obj);
+            }
+
+            obj.SetActive(true);
 
             var itemIcon = obj.transform.Find("ItemSprite").GetComponent<Image>();
             var itemName = obj.transform.Find("ItemName").GetComponent<TMP_Text>();
 
-            itemIcon.sprite = item.ItemImage;
-            itemName.text = item.ItemName;
+            itemIcon.sprite = inventory[i].ItemImage;
+            itemName.text = inventory[i].ItemName;
         }
     }
 
@@ -56,6 +86,8 @@ public class Inventory : MonoBehaviour
     }
 
     void Awake() {
+
+        GeneratePool();
 
         CreateInstance();
     }
