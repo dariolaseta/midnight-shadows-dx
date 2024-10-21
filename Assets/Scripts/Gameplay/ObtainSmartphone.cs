@@ -12,7 +12,14 @@ public class ObtainSmartphone : MonoBehaviour, IInteractable
 
         StartCoroutine(StoryItemTextBehaviour.Instance.ShowStoryItemObtain(item, gameObject));
 
-        gameObject.GetComponentInChildren<MeshRenderer>().enabled = false;
-        gameObject.GetComponent<MeshRenderer>().enabled = false;
+        MeshRenderer[] renderers = gameObject.GetComponentsInChildren<MeshRenderer>();
+
+        foreach (MeshRenderer renderer in renderers) {
+
+            if (renderer != null) {
+
+                renderer.enabled = false;
+            }
+        }
     }
 }
