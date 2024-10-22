@@ -21,5 +21,12 @@ public class ObtainSmartphone : MonoBehaviour, IInteractable
                 renderer.enabled = false;
             }
         }
+
+        BoxCollider collider = gameObject.GetComponent<BoxCollider>();
+
+        if (collider != null) {
+
+            collider.enabled = false;
+        }
     }
 }
