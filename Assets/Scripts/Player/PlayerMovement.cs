@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.PlayerLoop;
 
 [RequireComponent(typeof(CharacterController))]
@@ -14,6 +17,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float crouchHeight = 1f;
     [SerializeField] float crouchSpeed = 3f;
 
+    [SerializeField] InputActionReference moveAction;
+    [SerializeField] InputActionReference lookAction;
+    [SerializeField] InputActionReference runAction;
+    [SerializeField] InputActionReference crouchAction;
+
     private float gravity = 10f;
     private float rotationX = 0;
     private float startWalkingSpeed;
@@ -21,23 +29,73 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isMoving = false;
     private bool isPlaying = false;
-    private bool canMove = true;
+    private bool isRunning = false;
+    private bool isCrouching = false;
 
     private AudioSource audioSource;
     private Vector3 moveDirection = Vector3.zero;
+    private Vector2 lookInput;
 
     private CharacterController characterController;
     private Animator anim;
     private Camera playerCamera;
 
     private void Awake() {
-        
+
         ObtainComponent();
     }
 
     void Start() {
 
         Init();
+
+        BindInputActions();
+    }
+
+    private void OnEnable() {
+        
+        EnableInputActions();
+    }
+
+    private void OnDisable() {
+
+        DisableInputActions();
+    }
+
+    private void BindInputActions() {
+
+        moveAction.action.performed += ctx => moveDirection = ctx.ReadValue<Vector3>();
+        moveAction.action.canceled += ctx => moveDirection = Vector3.zero;
+
+        lookAction.action.performed += ctx => lookInput = ctx.ReadValue<Vector2>();
+        lookAction.action.canceled += ctx => lookInput = Vector2.zero;
+
+        runAction.action.performed += ctx => isRunning = true;
+        runAction.action.canceled += ctx => isRunning = false;
+
+        crouchAction.action.performed += ctx => ToggleCrouch();
+    }
+
+    private void EnableInputActions() {
+        moveAction.action.Enable();
+        lookAction.action.Enable();
+        runAction.action.Enable();
+        crouchAction.action.Enable();
+    }
+
+    private void DisableInputActions() {
+        moveAction.action.Disable();
+        lookAction.action.Disable();
+        runAction.action.Disable();
+        crouchAction.action.Disable();
+    }
+
+    private void ToggleCrouch() {
+
+        isCrouching = !isCrouching;
+        characterController.height = isCrouching ? crouchHeight : defaultHeight;
+        walkSpeed = isCrouching ? crouchSpeed : startWalkingSpeed;
+        runSpeed = isCrouching ? crouchSpeed : startRunningSpeed;
     }
     
     private void Update() {
@@ -47,74 +105,44 @@ public class PlayerMovement : MonoBehaviour
 
     private void MoveCharacter() {
 
-        if (!canMove) return;
+        // Determina la velocità di movimento e la direzione
+        Vector3 desiredMoveDirection = transform.TransformDirection(new Vector3(moveDirection.x, 0, moveDirection.z));
+        float currentSpeed = isCrouching ? crouchSpeed : (isRunning ? runSpeed : walkSpeed);
+        desiredMoveDirection *= currentSpeed;
 
-        float verticalInput = Input.GetAxis("Vertical");
-        float horizontalInput = Input.GetAxis("Horizontal");
-        bool isRunning = Input.GetKey(KeyCode.LeftShift);
-        
-        float curSpeedX = isRunning ? runSpeed * verticalInput : walkSpeed * verticalInput;
-        float curSpeedY = isRunning ? runSpeed * horizontalInput : walkSpeed * horizontalInput;
-
-        Vector3 desiredMoveDirection = transform.TransformDirection(Vector3.forward) * curSpeedX + transform.TransformDirection(Vector3.right) * curSpeedY;
-
-        if (desiredMoveDirection.sqrMagnitude > 0.01f) {
-            moveDirection.x = desiredMoveDirection.x;
-            moveDirection.z = desiredMoveDirection.z;
-            isMoving = true;
-        } else {
-            moveDirection.x = 0;
-            moveDirection.z = 0;
-            isMoving = false;
-        }
-
-        // Handle crouching
-        if (Input.GetKey(KeyCode.C)) {
-
-            characterController.height = crouchHeight;
-            walkSpeed = crouchSpeed;
-            runSpeed = crouchSpeed;
-        } else {
-
-            characterController.height = defaultHeight;
-            walkSpeed = startWalkingSpeed;
-            runSpeed = startRunningSpeed;
-        }
-
-        // Apply gravity
+        // Gestisce la gravità
         if (!characterController.isGrounded) {
-            
             moveDirection.y -= gravity * Time.deltaTime;
         } else {
-
             moveDirection.y = 0;
         }
 
-        characterController.Move(moveDirection * Time.deltaTime);
+        // Applica il movimento
+        characterController.Move((desiredMoveDirection + Vector3.up * moveDirection.y) * Time.deltaTime);
 
-        // Handle rotation
-        rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
+        // Rotazione della telecamera
+        rotationX += -lookInput.y * lookSpeed;
         rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
         playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
-        transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
+        transform.rotation *= Quaternion.Euler(0, lookInput.x * lookSpeed, 0);
 
-        // Update animation and audio
+        // Gestione dell'animazione e dell'audio
+        isMoving = moveDirection.sqrMagnitude > 0.01f;
+        anim.SetFloat("Speed", isMoving ? 1f : 0);
         if (isMoving) {
-            
-            anim.SetFloat("Speed", 1f);
             if (!isPlaying && audioSource.clip != null) {
                 audioSource.Play();
                 isPlaying = true;
             }
         } else {
-            anim.SetFloat("Speed", 0);
             if (isPlaying && audioSource.clip != null) {
                 audioSource.Stop();
                 isPlaying = false;
             }
         }
 
-        if (isRunning) 
+        // Aggiorna il bobbing della telecamera
+        if (isRunning)
             CamerabobSystem.Instance.SetBobVelocity(0.008f, 20.0f, 80.0f);
         else
             CamerabobSystem.Instance.ResetBobVelocity();
