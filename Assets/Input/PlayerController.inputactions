@@ -16,7 +16,7 @@
                 },
                 {
                     "name": "Look",
-                    "type": "PassThrough",
+                    "type": "Value",
                     "id": "f752d5ca-dc93-45dd-b986-bcb7d9ea099c",
                     "expectedControlType": "Vector2",
                     "processors": "",
@@ -36,6 +36,42 @@
                     "name": "Crouch",
                     "type": "Button",
                     "id": "8d3bec3f-714f-432c-8b3f-37e0bc4bb260",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "OpenInventory",
+                    "type": "Button",
+                    "id": "050fc86a-44d7-437e-bbcc-2c2e27d9eae6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Smartphone",
+                    "type": "Button",
+                    "id": "0a705883-f4cb-4de8-bf37-0869f0df4b56",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SmartphoneLight",
+                    "type": "Button",
+                    "id": "1cbc518e-a907-489f-bacf-bbac7aa04bba",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "450e3d86-0df5-452b-95e7-bd653ec007cd",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -150,6 +186,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "Crouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "68e652af-f56d-411e-9359-790fa1861330",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenInventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ab716e1c-554e-458a-9ff5-02a37670bc91",
+                    "path": "<Keyboard>/m",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Smartphone",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8694cbb3-6cf7-4a5c-8acf-93fed05695ef",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SmartphoneLight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5aadfc7f-0675-4a39-bd94-65159e87459b",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

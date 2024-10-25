@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public enum GameState { FREEROAM, DIALOG, PAUSE, INVENTORY, CUTSCENE, OBTAIN_ITEM, SMARTPHONE }
 public class GameController : MonoBehaviour
@@ -10,6 +11,11 @@ public class GameController : MonoBehaviour
 
     [SerializeField] GameObject inventoryScreen;
     [SerializeField] GameObject pauseScreen;
+
+    [SerializeField] InputActionReference inventoryAction;
+    [SerializeField] InputActionReference smartphoneAction;
+    [SerializeField] InputActionReference smartphoneLightAction;
+    [SerializeField] InputActionReference pauseAction;
 
     private Light smartphoneLight;
 
@@ -48,13 +54,44 @@ public class GameController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    void Update() {
+    private void OnEnable() {
 
-        StartCoroutine(OpenInventory());
+        EnableInputActions();
+    }
 
-        SmartphoneBeheavior();
+    private void OnDisable() {
 
-        HandlePauseMenu();
+        DisableInputActions();
+    }
+
+    private void EnableInputActions() {
+
+        inventoryAction.action.Enable();
+        inventoryAction.action.started += OpenInventory;
+
+        smartphoneAction.action.Enable();
+        smartphoneAction.action.started += SmartphoneBeheavior;
+
+        smartphoneLightAction.action.Enable();
+        smartphoneLightAction.action.started += SwitchSmartphoneLightOn;
+
+        pauseAction.action.Enable();
+        pauseAction.action.started += HandlePauseMenu;
+    }
+
+    private void DisableInputActions() {
+
+        inventoryAction.action.Disable();
+        inventoryAction.action.started -= OpenInventory;
+
+        smartphoneAction.action.Disable();
+        smartphoneAction.action.started -= SmartphoneBeheavior;
+
+        smartphoneLightAction.action.Disable();
+        smartphoneLightAction.action.started -= SwitchSmartphoneLightOn;
+
+        pauseAction.action.Disable();
+        pauseAction.action.started -= HandlePauseMenu;
     }
 
     private void CreateInstance() {
@@ -93,42 +130,41 @@ public class GameController : MonoBehaviour
         state = prevState;
     }
 
-    private void SmartphoneBeheavior() {
+    private void SmartphoneBeheavior(InputAction.CallbackContext obj) {
 
         if (!Flags.Instance.IsFlagTrue("hasSmartphone")) return;
 
-        if (Input.GetKeyDown(KeyCode.M) && state == GameState.FREEROAM && Flags.Instance.IsFlagTrue("hasSmartphone") && !isSmartphoneON) {
+        if (state == GameState.FREEROAM && Flags.Instance.IsFlagTrue("hasSmartphone") && !isSmartphoneON) {
 
             smartphoneAnim.gameObject.SetActive(true);
 
             smartphoneAnim.SetTrigger("ON");
 
             isSmartphoneON = true;
-        } else if (Input.GetKeyDown(KeyCode.M) && state == GameState.FREEROAM && Flags.Instance.IsFlagTrue("hasSmartphone") && isSmartphoneON) {
+        } else if (state == GameState.FREEROAM && Flags.Instance.IsFlagTrue("hasSmartphone") && isSmartphoneON) {
             
             smartphoneLight.enabled = false;
             smartphoneAnim.SetTrigger("Close");
 
             isSmartphoneON = false;
         }
+    }
 
-        if (isSmartphoneON && Input.GetKeyDown(KeyCode.F) && state == GameState.FREEROAM) {
+    private void SwitchSmartphoneLightOn(InputAction.CallbackContext obj) {
+
+        if (isSmartphoneON && state == GameState.FREEROAM) {
 
             smartphoneLight.enabled = !smartphoneLight.enabled;
         }
     }
 
-    private IEnumerator OpenInventory() {
+    private void OpenInventory(InputAction.CallbackContext obj) {
 
-        if (Input.GetKeyDown(KeyCode.Tab) && !isInventoryOpen && state == GameState.FREEROAM && Flags.Instance.IsFlagTrue("hasBackpack")) {
+        if (!isInventoryOpen && state == GameState.FREEROAM && Flags.Instance.IsFlagTrue("hasBackpack")) {
 
             playerAnim.enabled = true;
 
             ChangeState(GameState.INVENTORY);
-
-            playerAnim.SetTrigger("OpenBackpack");
-
-            yield return new WaitForSeconds(1.5f);
 
             inventoryScreen.SetActive(true);
 
@@ -137,13 +173,9 @@ public class GameController : MonoBehaviour
             isInventoryOpen = true;
             
             Inventory.Instance.ListItems();
-        } else if (Input.GetKeyDown(KeyCode.Tab) && isInventoryOpen && state == GameState.INVENTORY && Flags.Instance.IsFlagTrue("hasBackpack")) {
-
-            playerAnim.SetTrigger("CloseBackpack");
+        } else if (isInventoryOpen && state == GameState.INVENTORY && Flags.Instance.IsFlagTrue("hasBackpack")) {
 
             inventoryScreen.SetActive(false);
-
-            yield return new WaitForSeconds(1.5f);
 
             playerAnim.enabled = false;
 
@@ -169,14 +201,18 @@ public class GameController : MonoBehaviour
         Cursor.visible = false;
     }
 
-    private void HandlePauseMenu() {
+    private void HandlePauseMenu(InputAction.CallbackContext obj) {
 
-        if (state == GameState.FREEROAM && Input.GetKeyDown(KeyCode.Escape)) {
 
-            Pause();
-        } else if (state == GameState.PAUSE && Input.GetKeyDown(KeyCode.Escape)) {
+        switch(state) {
 
-            Resume();
+            case GameState.FREEROAM:
+                Pause();
+                break;
+
+            case GameState.PAUSE:
+                Resume();
+                break;
         }
     }
 

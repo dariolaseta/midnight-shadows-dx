@@ -32112,6 +32112,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryScreen: {fileID: 741152589}
   pauseScreen: {fileID: 1207137505}
+  inventoryAction: {fileID: -905013568239412088, guid: ad07a5bb4bf604a42aaf97a9f60d0091,
+    type: 3}
+  smartphoneAction: {fileID: 3013377100901321961, guid: ad07a5bb4bf604a42aaf97a9f60d0091,
+    type: 3}
+  smartphoneLightAction: {fileID: 7131654952965565067, guid: ad07a5bb4bf604a42aaf97a9f60d0091,
+    type: 3}
+  pauseAction: {fileID: -6511589243379420518, guid: ad07a5bb4bf604a42aaf97a9f60d0091,
+    type: 3}
   versionTxt: {fileID: 86202364}
 --- !u!114 &1736236422
 MonoBehaviour:

@@ -88,6 +88,11 @@ public class PlayerMovement : MonoBehaviour
         lookAction.action.Disable();
         runAction.action.Disable();
         crouchAction.action.Disable();
+
+        moveAction.action.started -= ctx => moveDirection = Vector3.zero;
+        lookAction.action.started -= ctx => lookInput = Vector2.zero;
+        runAction.action.started -= ctx => isRunning = false;
+        crouchAction.action.started -= ctx => isCrouching = false;
     }
 
     private void ToggleCrouch() {
