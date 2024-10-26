@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class SettingsMenu : MonoBehaviour
 {
-    [SerializeField] GameObject pauseMenu;
+    [SerializeField] GameObject mainMenu;
+    [SerializeField] GameObject settingsMenu;
 
     [SerializeField] Toggle fullscreenToggle;
     [SerializeField] Toggle vsyncToggle;
@@ -15,6 +18,8 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField] List<ResItems> resolutions = new List<ResItems>();
 
     [SerializeField] TMP_Text resolutionLabel;
+
+    [SerializeField] int firstLevelID = 0;
 
     private int selectedResolution = 0;
 
@@ -30,6 +35,35 @@ public class SettingsMenu : MonoBehaviour
         vsyncToggle.isOn = QualitySettings.vSyncCount != 0;
 
         FindResolutions();
+    }
+
+    public void StartNewGame() {
+
+        // TODO: Cambiare con LoadSceneAsync per schermata di caricamento
+        SceneManager.LoadScene(firstLevelID);
+    }
+
+    // TODO: Capire se tenere
+    public void Continue() {
+
+        Debug.Log("Continue");
+    }
+
+    public void OpenSettingsMenu() {
+
+        mainMenu.SetActive(false);
+        settingsMenu.SetActive(true);
+    }
+
+    public void QuitToDesktop() {
+
+        Application.Quit();
+        
+        // TODO: Rimuovere
+        if (Application.isEditor) {
+
+            EditorApplication.ExitPlaymode();
+        }
     }
 
     private void FindResolutions() {
@@ -63,9 +97,9 @@ public class SettingsMenu : MonoBehaviour
 
     public void GoBack() {
 
-        pauseMenu.SetActive(true);
+        mainMenu.SetActive(true);
 
-        gameObject.SetActive(false);
+        settingsMenu.SetActive(false);
     }
 
     public void ResLeft() {
