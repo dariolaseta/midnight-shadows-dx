@@ -14,6 +14,10 @@ public class SettingsMenu : MonoBehaviour
 
     [SerializeField] Toggle fullscreenToggle;
     [SerializeField] Toggle vsyncToggle;
+    [SerializeField] Toggle pixelationToggle;
+
+    [SerializeField] RenderTexture pixelationTexture;
+    [SerializeField] GameObject pixelationObj;
 
     [SerializeField] List<ResItems> resolutions = new List<ResItems>();
 
@@ -22,6 +26,15 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField] int firstLevelID = 0;
 
     private int selectedResolution = 0;
+
+    private Camera mainCamera;
+
+    void Awake() {
+
+        mainCamera = Camera.main;
+
+        pixelationTexture = mainCamera.targetTexture;
+    }
 
     void Start() {
 
@@ -122,6 +135,10 @@ public class SettingsMenu : MonoBehaviour
     }
 
     public void ApplyGraphics() {
+
+        mainCamera.targetTexture = pixelationToggle.isOn ? pixelationTexture : null;
+
+        pixelationObj.SetActive(pixelationToggle.isOn);
 
         QualitySettings.vSyncCount = vsyncToggle.isOn ? 1 : 0;
 
