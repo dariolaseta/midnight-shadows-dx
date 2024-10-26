@@ -44,9 +44,13 @@ public class CamerabobSystem : MonoBehaviour
 
     private void CheckForBobTrigger() {
 
-        float inputMagnitude = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).magnitude;
+        if (GameController.Instance.State == GameState.FREEROAM) {
 
-        if (inputMagnitude > 0) StartHeadBob();
+            float inputMagnitude = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).magnitude;
+            if (inputMagnitude > 0) StartHeadBob();
+        }
+
+
     }
 
     private Vector3 StartHeadBob() {
