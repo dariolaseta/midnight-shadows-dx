@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 interface IInteractable {
@@ -14,11 +16,39 @@ public class Interactor : MonoBehaviour
     [SerializeField] Image bigCursor;
     [SerializeField] Image grabCursor;
 
+    [SerializeField] InputActionReference interactAction;
+
     private void Start() {
 
         bigCursor.enabled = false;
         grabCursor.enabled = false;
 
+    }
+
+    void OnEnable() {
+
+        interactAction.action.performed += OnInteractPerformed;
+        
+        bigCursor.enabled = false;
+        grabCursor.enabled = false;
+    }
+
+    void OnDisable() {
+
+        interactAction.action.performed -= OnInteractPerformed;
+    }
+
+    private void OnInteractPerformed(InputAction.CallbackContext context) {
+
+        Ray r = new Ray(InteractorSource.position, InteractorSource.forward);
+
+        if (Physics.Raycast(r, out RaycastHit hitInfo, InteractRange)) {
+
+            if (hitInfo.collider.gameObject.TryGetComponent(out IInteractable interactObj) && GameController.Instance.State == GameState.FREEROAM) {
+
+                interactObj.Interact();
+            }
+        }
     }
 
     void Update() {
@@ -35,12 +65,6 @@ public class Interactor : MonoBehaviour
             if (hitInfo.collider.gameObject.TryGetComponent(out IInteractable interactObj)) {
 
                 UpdateCursor(hitInfo.collider.gameObject.tag);
-
-                // TODO: Cambiare nel caso volessi mettere tasti configurabili
-                if ((Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0)) && GameController.Instance.State == GameState.FREEROAM) {
-
-                    interactObj.Interact();
-                }
             } else {
 
                 ResetCursors();

@@ -27246,6 +27246,8 @@ MonoBehaviour:
   InteractorSource: {fileID: 1210399465}
   bigCursor: {fileID: 228715852}
   grabCursor: {fileID: 170780147}
+  interactAction: {fileID: 2560874108361810365, guid: ad07a5bb4bf604a42aaf97a9f60d0091,
+    type: 3}
 --- !u!114 &1605249577
 MonoBehaviour:
   m_ObjectHideFlags: 0
