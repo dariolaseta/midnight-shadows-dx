@@ -10,6 +10,9 @@ TagManager:
   - Objective
   - Smartphone
   - StoryItemUI
+  - Inspectable
+  - CursorsHolder
+  - InspectPosition
   layers:
   - Default
   - TransparentFX

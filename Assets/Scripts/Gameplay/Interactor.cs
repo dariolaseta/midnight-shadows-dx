@@ -44,7 +44,7 @@ public class Interactor : MonoBehaviour
 
         if (Physics.Raycast(r, out RaycastHit hitInfo, InteractRange)) {
 
-            if (hitInfo.collider.gameObject.TryGetComponent(out IInteractable interactObj) && GameController.Instance.State == GameState.FREEROAM) {
+            if (hitInfo.collider.gameObject.TryGetComponent(out IInteractable interactObj) && (GameController.Instance.State == GameState.FREEROAM || GameController.Instance.State == GameState.INSPECTING)) {
 
                 interactObj.Interact();
             }

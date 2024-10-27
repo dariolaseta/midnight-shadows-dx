@@ -73,10 +73,10 @@ public class SettingsMenu : MonoBehaviour
         Application.Quit();
         
         // TODO: Rimuovere
-        if (Application.isEditor) {
+        //if (Application.isEditor) {
 
-            EditorApplication.ExitPlaymode();
-        }
+        //    EditorApplication.ExitPlaymode();
+        //}
     }
 
     private void FindResolutions() {
