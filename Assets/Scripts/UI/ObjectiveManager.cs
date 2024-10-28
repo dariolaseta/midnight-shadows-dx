@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ObjectiveManager : MonoBehaviour
 {
@@ -13,15 +14,22 @@ public class ObjectiveManager : MonoBehaviour
 
     [SerializeField] TMP_Text objectiveText;
 
+    [SerializeField] InputActionReference objectiveButton;
+
     private void Awake() {
         
         CreateInstance();
         ObtainComponents();
     }
 
-    void Update() {
-        
-        HandleCurrentObjective();
+    private void Start() {
+
+        objectiveButton.action.performed += HandleCurrentObjective;
+    }
+
+    private void OnDisable() {
+
+        objectiveButton.action.performed -= HandleCurrentObjective;
     }
 
     public void SetNewObjective(string newObjective) {
@@ -31,10 +39,9 @@ public class ObjectiveManager : MonoBehaviour
         StartCoroutine(ShowCurrentObjective());
     }
 
-    private void HandleCurrentObjective() {
+    private void HandleCurrentObjective(InputAction.CallbackContext context) {
 
-        // TODO: Cambiare se decido di implementare tasti modificabili
-        if (Input.GetKeyDown(KeyCode.O) && !isShowingCurrentObjective) {
+        if (!isShowingCurrentObjective && GameController.Instance.State == GameState.FREEROAM) {
 
             isShowingCurrentObjective = true;
 

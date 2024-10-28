@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class ObtainItemUI : MonoBehaviour
@@ -13,6 +14,8 @@ public class ObtainItemUI : MonoBehaviour
     [SerializeField] Image itemImage;
 
     [SerializeField] TMP_Text itemDescription;
+
+    [SerializeField] InputActionReference closeUIButton;
 
     public void ShowObtainingItemUI(Sprite newItemImage, string newItemDescription) {
 

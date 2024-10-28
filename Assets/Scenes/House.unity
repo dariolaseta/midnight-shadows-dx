@@ -1737,14 +1737,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: WaterBottle_3
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a52539dc9538a00498de71927229e9a9,
+        type: 3}
+      propertyPath: m_TagString
+      value: Inspectable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a52539dc9538a00498de71927229e9a9,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 568337376}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a52539dc9538a00498de71927229e9a9, type: 3}
 --- !u!4 &102493412 stripped
 Transform:
@@ -10463,30 +10464,6 @@ Transform:
   - {fileID: 527938643}
   m_Father: {fileID: 1851763448}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &568337373 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a52539dc9538a00498de71927229e9a9,
-    type: 3}
-  m_PrefabInstance: {fileID: 102493411}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &568337376
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 568337373}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9286797049c457c41af42ab6bf344abf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cursorsHolder: {fileID: 0}
-  inspectPosition: {fileID: 0}
-  moveSpeed: 0.2
-  rotationSpeed: 1
-  rotationAction: {fileID: 0}
-  interactAction: {fileID: 0}
 --- !u!43 &570611653
 Mesh:
   m_ObjectHideFlags: 0
@@ -11871,7 +11848,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: c8c5e09b245794e45b25d23b53826b37, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -32261,6 +32238,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectiveText: {fileID: 2124274319}
+  objectiveButton: {fileID: 3925901509464618443, guid: ad07a5bb4bf604a42aaf97a9f60d0091,
+    type: 3}
 --- !u!114 &1736236423
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ MonoImporter:
   defaultReferences:
   - cursorsHolder: {instanceID: 0}
   - inspectPosition: {instanceID: 0}
-  - rotationAction: {fileID: -905013568239412088, guid: ad07a5bb4bf604a42aaf97a9f60d0091,
+  - rotationAction: {fileID: 8855199692729608689, guid: ad07a5bb4bf604a42aaf97a9f60d0091,
       type: 3}
   - interactAction: {instanceID: 0}
   executionOrder: 0
