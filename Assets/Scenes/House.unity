@@ -423,7 +423,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -362}
+  m_AnchoredPosition: {x: 0, y: -391}
   m_SizeDelta: {x: 1201.6938, y: 103.4237}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &28621625
@@ -474,8 +474,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 35
+  m_fontSizeBase: 35
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5177,8 +5177,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -20415,7 +20415,7 @@ GameObject:
   - component: {fileID: 1234485145}
   - component: {fileID: 1234485144}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: ItemTest
   m_TagString: Pickup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27254,11 +27254,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 4027fe08a68a0aa4889fe144c2936f6d, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -32181,6 +32181,7 @@ GameObject:
   - component: {fileID: 1736236424}
   - component: {fileID: 1736236425}
   - component: {fileID: 1736236426}
+  - component: {fileID: 1736236427}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -32295,6 +32296,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obtainingItem: 'Hai ottenuto '
+--- !u!114 &1736236427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736236419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f79d60766acbc647bb76f69802d863c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorOpen: {fileID: 0}
+  sfxPlayer: {fileID: 1605249573}
 --- !u!43 &1757906974
 Mesh:
   m_ObjectHideFlags: 0
@@ -33356,7 +33371,7 @@ GameObject:
   - component: {fileID: 1923114955}
   - component: {fileID: 1923114954}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: ItemTest
   m_TagString: Pickup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

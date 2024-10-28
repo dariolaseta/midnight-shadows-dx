@@ -6,6 +6,10 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance { get; private set; }
 
+    [SerializeField] AudioClip doorOpen;
+
+    [SerializeField] AudioSource sfxPlayer;
+
     void Awake() {
         
         CreateInstance();
@@ -20,5 +24,10 @@ public class AudioManager : MonoBehaviour
         }
 
         Instance = this;
+    }
+
+    public void PlaySFX(AudioClip audioClip) {
+
+        sfxPlayer.PlayOneShot(audioClip);
     }
 }

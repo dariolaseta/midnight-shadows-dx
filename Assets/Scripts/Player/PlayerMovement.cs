@@ -131,20 +131,9 @@ public class PlayerMovement : MonoBehaviour
         playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
         transform.rotation *= Quaternion.Euler(0, lookInput.x * lookSpeed, 0);
 
-        // Gestione dell'animazione e dell'audio
+        // Gestione dell'animazione
         isMoving = moveDirection.sqrMagnitude > 0.01f;
         anim.SetFloat("Speed", isMoving ? 1f : 0);
-        if (isMoving) {
-            if (!isPlaying && audioSource.clip != null) {
-                audioSource.Play();
-                isPlaying = true;
-            }
-        } else {
-            if (isPlaying && audioSource.clip != null) {
-                audioSource.Stop();
-                isPlaying = false;
-            }
-        }
 
         // Aggiorna il bobbing della telecamera
         if (isRunning)

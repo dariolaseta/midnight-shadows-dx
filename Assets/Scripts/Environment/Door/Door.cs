@@ -6,6 +6,9 @@ public class Door : MonoBehaviour, IInteractable
 {
     [SerializeField] bool isOpen = false;
 
+    [SerializeField] AudioClip openDoorSFX;
+    [SerializeField] AudioClip closeDoorSFX;
+
     private bool isOpening = false;
 
     private Animator anim;
@@ -31,6 +34,8 @@ public class Door : MonoBehaviour, IInteractable
             isOpen = true;
             
             anim.SetTrigger("OpenDoor");
+
+            AudioManager.Instance.PlaySFX(openDoorSFX);
             
             yield return new WaitForSeconds(.7f);
 
@@ -40,6 +45,8 @@ public class Door : MonoBehaviour, IInteractable
             isOpen = false;
 
             anim.SetTrigger("CloseDoor");
+
+            AudioManager.Instance.PlaySFX(closeDoorSFX);
 
             yield return new WaitForSeconds(.7f);
 

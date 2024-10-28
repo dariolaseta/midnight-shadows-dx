@@ -343,6 +343,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isOpen: 0
+  openDoorSFX: {fileID: 8300000, guid: 3bc4d9657c781e74887b2b4b0783f7a7, type: 3}
+  closeDoorSFX: {fileID: 8300000, guid: 254a116fce09f974a8c007d7713d3e57, type: 3}
 --- !u!1 &4046660976064289660
 GameObject:
   m_ObjectHideFlags: 0
