@@ -10,6 +10,9 @@ public class LightSwitch : MonoBehaviour, IInteractable
 
     [SerializeField] Material lightOnMaterial;
 
+    [SerializeField] AudioClip switchSoundOn;
+    [SerializeField] AudioClip switchSoundOff;
+
     private Material lightOffMaterial;
 
     private Animator anim;
@@ -47,6 +50,10 @@ public class LightSwitch : MonoBehaviour, IInteractable
 
         lightOn = !lightOn;
         pointLight.enabled = lightOn;
+
+        AudioClip lightSwitchClip = lightOn ? switchSoundOn : switchSoundOff;
+
+        AudioManager.Instance.PlaySFX(lightSwitchClip);
 
         anim.SetBool("isOn", lightOn);
 
