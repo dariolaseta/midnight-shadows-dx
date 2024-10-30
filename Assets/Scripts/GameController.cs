@@ -24,7 +24,7 @@ public class GameController : MonoBehaviour
     private Animator[] animators;
 
     private bool isInventoryOpen = false;
-    private bool isSmartphoneON = false;
+    private bool isSmartphoneOn = false;
 
     private AudioSource[] audioSources;
 
@@ -37,7 +37,7 @@ public class GameController : MonoBehaviour
     // DEBUG
     [SerializeField] TMP_Text versionTxt;
 
-    private readonly string buildStatus = "Alpha v.";
+    private const string BuildStatus = "Alpha v.";
 
     void Awake() {
 
@@ -116,7 +116,7 @@ public class GameController : MonoBehaviour
 
     private void GetProjectVersion() {
         
-        versionTxt.text = buildStatus + " " + Application.version;
+        versionTxt.text = BuildStatus + " " + Application.version;
     }
 
     public void ChangeState(GameState newState) {
@@ -134,25 +134,25 @@ public class GameController : MonoBehaviour
 
         if (!Flags.Instance.IsFlagTrue("hasSmartphone")) return;
 
-        if (state == GameState.FREEROAM && Flags.Instance.IsFlagTrue("hasSmartphone") && !isSmartphoneON) {
+        if (state == GameState.FREEROAM && Flags.Instance.IsFlagTrue("hasSmartphone") && !isSmartphoneOn) {
 
             smartphoneAnim.gameObject.SetActive(true);
 
             smartphoneAnim.SetTrigger("ON");
 
-            isSmartphoneON = true;
-        } else if (state == GameState.FREEROAM && Flags.Instance.IsFlagTrue("hasSmartphone") && isSmartphoneON) {
+            isSmartphoneOn = true;
+        } else if (state == GameState.FREEROAM && Flags.Instance.IsFlagTrue("hasSmartphone") && isSmartphoneOn) {
             
             smartphoneLight.enabled = false;
             smartphoneAnim.SetTrigger("Close");
 
-            isSmartphoneON = false;
+            isSmartphoneOn = false;
         }
     }
 
     private void SwitchSmartphoneLightOn(InputAction.CallbackContext obj) {
 
-        if (isSmartphoneON && state == GameState.FREEROAM) {
+        if (isSmartphoneOn && state == GameState.FREEROAM) {
 
             smartphoneLight.enabled = !smartphoneLight.enabled;
         }
