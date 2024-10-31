@@ -52,8 +52,7 @@ public class SettingsMenu : MonoBehaviour
 
     public void StartNewGame() {
 
-        // TODO: Cambiare con LoadSceneAsync per schermata di caricamento
-        SceneManager.LoadScene(firstLevelID);
+        LoadingScene.Instance.LoadScene(firstLevelID);
     }
 
     // TODO: Capire se tenere
@@ -71,12 +70,6 @@ public class SettingsMenu : MonoBehaviour
     public void QuitToDesktop() {
 
         Application.Quit();
-        
-        // TODO: Rimuovere
-        //if (Application.isEditor) {
-
-        //    EditorApplication.ExitPlaymode();
-        //}
     }
 
     private void FindResolutions() {
