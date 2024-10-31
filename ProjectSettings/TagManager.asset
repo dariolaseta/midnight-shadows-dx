@@ -13,14 +13,15 @@ TagManager:
   - Inspectable
   - CursorsHolder
   - InspectPosition
+  - InspectCamera
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - PostProcessing
   - Water
   - UI
-  - 
+  - InspectLayer
   - 
   - 
   - 

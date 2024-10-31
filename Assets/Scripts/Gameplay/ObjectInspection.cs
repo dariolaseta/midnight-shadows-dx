@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class ObjectInspection : MonoBehaviour, IInteractable {
 
@@ -14,7 +16,10 @@ public class ObjectInspection : MonoBehaviour, IInteractable {
     [SerializeField] float rotationSpeed = 1.0f;
 
     [SerializeField] InputActionReference rotationAction;
-    [SerializeField] InputActionReference interactAction;
+    
+    [SerializeField] VolumeProfile volumeProfile;
+    
+    private DepthOfField depthOfField;
     
     private Vector3 originalPosition;
     
@@ -39,6 +44,11 @@ public class ObjectInspection : MonoBehaviour, IInteractable {
         playerCamera = Camera.main.transform;
 
         rotationAction.action.performed += OnRotatePerformed;
+
+        if (volumeProfile.TryGet(out depthOfField)) {
+            
+            depthOfField.active = false;
+        }
     }
 
     private void OnRotatePerformed(InputAction.CallbackContext context) {
@@ -81,6 +91,8 @@ public class ObjectInspection : MonoBehaviour, IInteractable {
         Cursor.visible = true;
 
         rotationAction.action.Enable();
+        
+        depthOfField.active = true;
     }
 
     private void StopExamination() {
@@ -94,5 +106,7 @@ public class ObjectInspection : MonoBehaviour, IInteractable {
         Cursor.visible = false;
 
         rotationAction.action.Disable();
+        
+        depthOfField.active = false;
     }
 }
