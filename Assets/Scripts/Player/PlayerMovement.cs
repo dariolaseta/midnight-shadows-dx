@@ -110,12 +110,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void MoveCharacter() {
 
-        // Determina la velocità di movimento e la direzione
+        // Determina la velocitï¿½ di movimento e la direzione
         Vector3 desiredMoveDirection = transform.TransformDirection(new Vector3(moveDirection.x, 0, moveDirection.z));
         float currentSpeed = isCrouching ? crouchSpeed : (isRunning ? runSpeed : walkSpeed);
         desiredMoveDirection *= currentSpeed;
 
-        // Gestisce la gravità
+        // Gestisce la gravitï¿½
         if (!characterController.isGrounded) {
             moveDirection.y -= gravity * Time.deltaTime;
         } else {
@@ -133,13 +133,8 @@ public class PlayerMovement : MonoBehaviour
 
         // Gestione dell'animazione
         isMoving = moveDirection.sqrMagnitude > 0.01f;
-        anim.SetFloat("Speed", isMoving ? 1f : 0);
-
-        // Aggiorna il bobbing della telecamera
-        if (isRunning)
-            CamerabobSystem.Instance.SetBobVelocity(0.008f, 20.0f, 80.0f);
-        else
-            CamerabobSystem.Instance.ResetBobVelocity();
+        anim.SetBool("isMoving", isMoving);
+        anim.speed = isRunning ? 15f : 1f;
     }
 
 
