@@ -1,12 +1,13 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
-public class ObjectInspection : MonoBehaviour, IInteractable {
+public class ObjectInspection : MonoBehaviour, IInteractable
+{
+
+    [SerializeField] Items item;
 
     [SerializeField] GameObject cursorsHolder;
 
@@ -16,8 +17,11 @@ public class ObjectInspection : MonoBehaviour, IInteractable {
     [SerializeField] float rotationSpeed = 1.0f;
 
     [SerializeField] InputActionReference rotationAction;
+    [SerializeField] InputActionReference inspectInteractAction;
     
     [SerializeField] VolumeProfile volumeProfile;
+    
+    [SerializeField] bool canObtainItem = false;
     
     private DepthOfField depthOfField;
     
@@ -28,6 +32,11 @@ public class ObjectInspection : MonoBehaviour, IInteractable {
     private bool isInspecting = false;
 
     private Transform playerCamera;
+    
+    // TODO: Move to another singleton script
+    [SerializeField] TMP_Text obtainedText;
+
+    [SerializeField] TMP_Text instructionLabel;
 
     void Start() {
 
@@ -44,10 +53,26 @@ public class ObjectInspection : MonoBehaviour, IInteractable {
         playerCamera = Camera.main.transform;
 
         rotationAction.action.performed += OnRotatePerformed;
+        inspectInteractAction.action.performed += OnItemObtained;
+        
+        // TODO: Move to other singleton script
+        //obtainedText = GameObject.FindGameObjectWithTag("ObtainedText").GetComponent<TextMeshPro>();
+        obtainedText.gameObject.SetActive(false);
+        
+        //instructionLabel = GameObject.FindGameObjectWithTag("InstructionsLabel").GetComponent<TextMeshPro>();
+        instructionLabel.gameObject.SetActive(false);
 
         if (volumeProfile.TryGet(out depthOfField)) {
             
             depthOfField.active = false;
+        }
+    }
+
+    private void OnItemObtained(InputAction.CallbackContext context)
+    {
+        if (isInspecting) {
+            
+            StopExamination(canObtainItem);
         }
     }
 
@@ -62,9 +87,10 @@ public class ObjectInspection : MonoBehaviour, IInteractable {
         }
     }
 
-    void OnDestroy() {
+    void OnDisable() {
 
         rotationAction.action.performed -= OnRotatePerformed;
+        inspectInteractAction.action.performed -= OnItemObtained;
     }
 
     public void Interact() {
@@ -83,6 +109,20 @@ public class ObjectInspection : MonoBehaviour, IInteractable {
     }
     private void StartExamination() {
 
+        if (canObtainItem) {
+            
+            string keyName = InputControlPath.ToHumanReadableString(inspectInteractAction.action.bindings[0].effectivePath);
+            
+            // TODO: Cercare un metodo migliore
+            if (keyName.Contains("[Keyboard]")) {
+                
+                keyName = keyName.Replace(" [Keyboard]", "");
+            }
+        
+            instructionLabel.gameObject.SetActive(true);
+            instructionLabel.text = "Premi " + keyName + " per ottenere l'oggetto.";
+        }
+
         GameController.Instance.ChangeState(GameState.INSPECTING);
 
         transform.position = inspectPosition.position;
@@ -95,7 +135,7 @@ public class ObjectInspection : MonoBehaviour, IInteractable {
         depthOfField.active = true;
     }
 
-    private void StopExamination() {
+    private void StopExamination(bool itemObtained = false) {
 
         GameController.Instance.GoToPrevState();
 
@@ -108,5 +148,19 @@ public class ObjectInspection : MonoBehaviour, IInteractable {
         rotationAction.action.Disable();
         
         depthOfField.active = false;
+        
+        cursorsHolder.SetActive(true);
+
+        if (itemObtained) {
+            
+            instructionLabel.gameObject.SetActive(false);
+            
+            Inventory.Instance.AddNewItem(item);
+            
+            obtainedText.gameObject.SetActive(true);
+            obtainedText.text = "Obtained: " + item.name;
+            
+            gameObject.SetActive(false);
+        }
     }
 }
