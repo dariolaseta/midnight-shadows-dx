@@ -32,11 +32,6 @@ public class ObjectInspection : MonoBehaviour, IInteractable
     private bool isInspecting = false;
 
     private Transform playerCamera;
-    
-    // TODO: Move to another singleton script
-    [SerializeField] TMP_Text obtainedText;
-
-    [SerializeField] TMP_Text instructionLabel;
 
     void Start() {
 
@@ -54,13 +49,6 @@ public class ObjectInspection : MonoBehaviour, IInteractable
 
         rotationAction.action.performed += OnRotatePerformed;
         inspectInteractAction.action.performed += OnItemObtained;
-        
-        // TODO: Move to other singleton script
-        //obtainedText = GameObject.FindGameObjectWithTag("ObtainedText").GetComponent<TextMeshPro>();
-        obtainedText.gameObject.SetActive(false);
-        
-        //instructionLabel = GameObject.FindGameObjectWithTag("InstructionsLabel").GetComponent<TextMeshPro>();
-        instructionLabel.gameObject.SetActive(false);
 
         if (volumeProfile.TryGet(out depthOfField)) {
             
@@ -119,8 +107,7 @@ public class ObjectInspection : MonoBehaviour, IInteractable
                 keyName = keyName.Replace(" [Keyboard]", "");
             }
         
-            instructionLabel.gameObject.SetActive(true);
-            instructionLabel.text = "Premi " + keyName + " per ottenere l'oggetto.";
+            UIManager.Instance.ShowInstructions(true, keyName);
         }
 
         GameController.Instance.ChangeState(GameState.INSPECTING);
@@ -136,6 +123,8 @@ public class ObjectInspection : MonoBehaviour, IInteractable
     }
 
     private void StopExamination(bool itemObtained = false) {
+        
+        UIManager.Instance.ShowInstructions(false);
 
         GameController.Instance.GoToPrevState();
 
@@ -153,14 +142,11 @@ public class ObjectInspection : MonoBehaviour, IInteractable
 
         if (itemObtained) {
             
-            instructionLabel.gameObject.SetActive(false);
+            UIManager.Instance.ShowInstructions(false);
             
             Inventory.Instance.AddNewItem(item);
-            
-            obtainedText.gameObject.SetActive(true);
-            obtainedText.text = "Obtained: " + item.name;
-            
-            gameObject.SetActive(false);
+
+            StartCoroutine(UIManager.Instance.ShowObtainedText(item.name, gameObject));
         }
     }
 }
