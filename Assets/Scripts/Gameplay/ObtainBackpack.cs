@@ -16,7 +16,7 @@ public class ObtainBackpack : MonoBehaviour, IInteractable
 
         //TODO: Add tutorial
 
-        StartCoroutine(UIManager.Instance.ShowStoryItemObtain(item, gameObject));
+        StartCoroutine(UIManager.Instance.ShowStoryItemObtainText(item, gameObject));
 
         gameObject.GetComponent<MeshRenderer>().enabled = false;
     }

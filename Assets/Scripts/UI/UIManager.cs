@@ -64,7 +64,7 @@ public class UIManager : MonoBehaviour
         itemObj.SetActive(false);
     }
     
-    public IEnumerator ShowStoryItemObtain(Items item, GameObject obj, string itemObtainedText = "Obtained ") {
+    public IEnumerator ShowStoryItemObtainText(Items item, GameObject obj, string itemObtainedText = "Obtained ") {
 
         storyItemUI.gameObject.SetActive(true);
         

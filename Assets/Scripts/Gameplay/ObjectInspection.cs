@@ -22,6 +22,8 @@ public class ObjectInspection : MonoBehaviour, IInteractable
     [SerializeField] VolumeProfile volumeProfile;
     
     [SerializeField] bool canObtainItem = false;
+
+    [SerializeField] private Camera inspectCamera;
     
     private DepthOfField depthOfField;
     
@@ -33,15 +35,22 @@ public class ObjectInspection : MonoBehaviour, IInteractable
 
     private Transform playerCamera;
 
+    private int originalLayer;
+
     void Start() {
 
         Init();
     }
 
     private void Init() {
+        
+        originalLayer = gameObject.layer;
 
         cursorsHolder = GameObject.FindGameObjectWithTag("CursorsHolder");
         inspectPosition = GameObject.FindGameObjectWithTag("InspectPosition").transform;
+        
+        inspectCamera = GameObject.FindGameObjectWithTag("InspectCamera").GetComponent<Camera>();
+        inspectCamera.gameObject.SetActive(false);
 
         originalPosition = transform.position;
         originalRotation = transform.rotation;
@@ -97,6 +106,10 @@ public class ObjectInspection : MonoBehaviour, IInteractable
     }
     private void StartExamination() {
 
+        gameObject.layer = 6;
+        
+        inspectCamera.gameObject.SetActive(true);
+
         if (canObtainItem) {
             
             string keyName = InputControlPath.ToHumanReadableString(inspectInteractAction.action.bindings[0].effectivePath);
@@ -123,6 +136,10 @@ public class ObjectInspection : MonoBehaviour, IInteractable
     }
 
     private void StopExamination(bool itemObtained = false) {
+        
+        gameObject.layer = originalLayer;
+        
+        inspectCamera.gameObject.SetActive(false);
         
         UIManager.Instance.ShowInstructions(false);
 
