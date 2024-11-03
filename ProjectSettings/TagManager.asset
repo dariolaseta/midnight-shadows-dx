@@ -16,6 +16,9 @@ TagManager:
   - InspectCamera
   - ObtainedText
   - InstructionsLabel
+  - OldPicture
+  - DocumentImg
+  - ImageHolder
   layers:
   - Default
   - TransparentFX
