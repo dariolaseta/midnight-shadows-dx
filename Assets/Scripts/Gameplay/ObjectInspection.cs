@@ -18,7 +18,6 @@ public class ObjectInspection : MonoBehaviour, IInteractable
 
     [SerializeField] InputActionReference rotationAction;
     [SerializeField] InputActionReference inspectInteractAction;
-    [SerializeField] InputActionReference stopInspectionAction;
     
     [SerializeField] VolumeProfile volumeProfile;
     
