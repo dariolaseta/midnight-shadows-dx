@@ -13672,7 +13672,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 678326211}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9286797049c457c41af42ab6bf344abf, type: 3}
   m_Name: 
@@ -13686,9 +13686,10 @@ MonoBehaviour:
     type: 3}
   inspectInteractAction: {fileID: 2506062597273827152, guid: ad07a5bb4bf604a42aaf97a9f60d0091,
     type: 3}
+  stopInspectionAction: {fileID: -3338284395553598577, guid: ad07a5bb4bf604a42aaf97a9f60d0091,
+    type: 3}
   volumeProfile: {fileID: 11400000, guid: 403c459c13615504d8c2b6231b6becc9, type: 2}
   canObtainItem: 1
-  inspectCamera: {fileID: 0}
 --- !u!850595691 &680456691
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -42076,9 +42077,9 @@ GameObject:
   - component: {fileID: 1736236423}
   - component: {fileID: 1736236424}
   - component: {fileID: 1736236425}
-  - component: {fileID: 1736236426}
   - component: {fileID: 1736236427}
   - component: {fileID: 1736236428}
+  - component: {fileID: 1736236429}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameController
@@ -42180,18 +42181,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueText: {fileID: 28621625}
---- !u!114 &1736236426
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1736236419}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 085f9e590c6bd3740aa4a18007614c28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1736236427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42220,6 +42209,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   instructionLabelObj: {fileID: 0}
   obtainItemLabelObj: {fileID: 0}
+--- !u!114 &1736236429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736236419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b92122aeae67b940b8ded5ad39ca4eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inspectCamera: {fileID: 0}
 --- !u!43 &1757906974
 Mesh:
   m_ObjectHideFlags: 0
@@ -53304,7 +53306,6 @@ GameObject:
   - component: {fileID: 1446648538281091359}
   - component: {fileID: 3744585205634422229}
   - component: {fileID: 3744585205634422230}
-  - component: {fileID: 3744585205634422231}
   m_Layer: 0
   m_Name: OldPicture
   m_TagString: Inspectable
@@ -54951,7 +54952,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1081170874471063482}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9286797049c457c41af42ab6bf344abf, type: 3}
   m_Name: 
@@ -54965,9 +54966,10 @@ MonoBehaviour:
     type: 3}
   inspectInteractAction: {fileID: 2506062597273827152, guid: ad07a5bb4bf604a42aaf97a9f60d0091,
     type: 3}
+  stopInspectionAction: {fileID: -3338284395553598577, guid: ad07a5bb4bf604a42aaf97a9f60d0091,
+    type: 3}
   volumeProfile: {fileID: 11400000, guid: 403c459c13615504d8c2b6231b6becc9, type: 2}
   canObtainItem: 0
-  inspectCamera: {fileID: 0}
 --- !u!23 &3744585205634422229
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -55032,30 +55034,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.000001, y: 2.000001, z: 88.94}
   m_Center: {x: -0.000030517578, y: 0, z: 31.03}
---- !u!114 &3744585205634422231
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2951982113654207488}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9286797049c457c41af42ab6bf344abf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  item: {fileID: 0}
-  cursorsHolder: {fileID: 0}
-  inspectPosition: {fileID: 139873901}
-  moveSpeed: 0.2
-  rotationSpeed: 1
-  rotationAction: {fileID: 8855199692729608689, guid: ad07a5bb4bf604a42aaf97a9f60d0091,
-    type: 3}
-  inspectInteractAction: {fileID: 2506062597273827152, guid: ad07a5bb4bf604a42aaf97a9f60d0091,
-    type: 3}
-  volumeProfile: {fileID: 11400000, guid: 403c459c13615504d8c2b6231b6becc9, type: 2}
-  canObtainItem: 0
-  inspectCamera: {fileID: 0}
 --- !u!4 &3753786554634738609
 Transform:
   m_ObjectHideFlags: 0

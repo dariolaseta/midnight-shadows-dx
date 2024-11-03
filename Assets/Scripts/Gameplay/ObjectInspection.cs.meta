@@ -4,11 +4,16 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
+  - item: {instanceID: 0}
   - cursorsHolder: {instanceID: 0}
   - inspectPosition: {instanceID: 0}
   - rotationAction: {fileID: 8855199692729608689, guid: ad07a5bb4bf604a42aaf97a9f60d0091,
       type: 3}
-  - interactAction: {instanceID: 0}
+  - inspectInteractAction: {fileID: 2506062597273827152, guid: ad07a5bb4bf604a42aaf97a9f60d0091,
+      type: 3}
+  - stopInspectionAction: {fileID: -3338284395553598577, guid: ad07a5bb4bf604a42aaf97a9f60d0091,
+      type: 3}
+  - volumeProfile: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
