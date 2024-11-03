@@ -53,7 +53,7 @@ public class LightSwitch : MonoBehaviour, IInteractable
 
         AudioClip lightSwitchClip = lightOn ? switchSoundOn : switchSoundOff;
 
-        AudioManager.Instance.PlaySFX(lightSwitchClip);
+        AudioManager.Instance.PlaySfx(lightSwitchClip);
 
         anim.SetBool("isOn", lightOn);
 

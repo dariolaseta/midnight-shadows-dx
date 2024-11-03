@@ -35,7 +35,7 @@ public class Door : MonoBehaviour, IInteractable
             
             anim.SetTrigger("OpenDoor");
 
-            AudioManager.Instance.PlaySFX(openDoorSFX);
+            AudioManager.Instance.PlaySfx(openDoorSFX);
             
             yield return new WaitForSeconds(.7f);
 
@@ -46,7 +46,7 @@ public class Door : MonoBehaviour, IInteractable
 
             anim.SetTrigger("CloseDoor");
 
-            AudioManager.Instance.PlaySFX(closeDoorSFX);
+            AudioManager.Instance.PlaySfx(closeDoorSFX);
 
             yield return new WaitForSeconds(.7f);
 

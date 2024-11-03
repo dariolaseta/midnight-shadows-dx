@@ -21,6 +21,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] InputActionReference lookAction;
     [SerializeField] InputActionReference runAction;
     [SerializeField] InputActionReference crouchAction;
+    
+    [SerializeField] AudioClip footstepSound;
 
     private float gravity = 10f;
     private float rotationX = 0;
@@ -168,5 +170,10 @@ public class PlayerMovement : MonoBehaviour
                 ObtainItemUI.Instance.CloseItemUI();
                 break;
         }
+    }
+
+    public void PlayFootstepSound() {
+        
+        AudioManager.Instance.PlaySfx(footstepSound);
     }
 }

@@ -26,7 +26,7 @@ public class AudioManager : MonoBehaviour
         Instance = this;
     }
 
-    public void PlaySFX(AudioClip audioClip) {
+    public void PlaySfx(AudioClip audioClip) {
 
         sfxPlayer.PlayOneShot(audioClip);
     }
