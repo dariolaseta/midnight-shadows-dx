@@ -49566,6 +49566,7 @@ GameObject:
   - component: {fileID: 633834187246398815}
   - component: {fileID: 4567792692018209530}
   - component: {fileID: 1765683773167244848}
+  - component: {fileID: 4567792692018209531}
   m_Layer: 0
   m_Name: ParentsBalconyWindow
   m_TagString: Untagged
@@ -53956,7 +53957,7 @@ MeshRenderer:
   m_Materials:
   - {fileID: -9103484930961366303, guid: 90cd8d3f3b161ed4cbdbd07f61e9ccac, type: 3}
   - {fileID: -1813038522963248422, guid: 90cd8d3f3b161ed4cbdbd07f61e9ccac, type: 3}
-  - {fileID: 2100000, guid: 3e7e49a1d9e9d1e4194f5b20cfc361ea, type: 2}
+  - {fileID: 2100000, guid: 630a234c3093bff42a8c025d38ee5d76, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -59247,6 +59248,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 252206498277603301}
   m_Mesh: {fileID: 8188034016070700170, guid: 90cd8d3f3b161ed4cbdbd07f61e9ccac, type: 3}
+--- !u!65 &4567792692018209531
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 252206498277603301}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.9999999, y: 1.9999999, z: 1.9999999}
+  m_Center: {x: 0, y: 0, z: -0.000011444092}
 --- !u!23 &4571333112481052924
 MeshRenderer:
   m_ObjectHideFlags: 0
