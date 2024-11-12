@@ -56,25 +56,34 @@ public class GunManager : MonoBehaviour
     private void Shoot(InputAction.CallbackContext obj) {
         
         Ray r = new Ray(shootingPointTransform.position, shootingPointTransform.forward);
+        
+        currentAmmo--;
 
         if (Physics.Raycast(r, out RaycastHit hitInfo, fireRange) && GameController.Instance.State == GameState.FREEROAM && Time.time >= nextTimeToFire) {
             
             if (currentAmmo <= 0) return;
             
+            HealthSystem targetHealth = hitInfo.collider.GetComponent<HealthSystem>();
+            
             nextTimeToFire = Time.time + 1f / fireRate;
             
-            currentAmmo--;
             Debug.Log("Shoot " + hitInfo.transform.name + " Current ammo: " + currentAmmo);
             
             impactObject.transform.position = hitInfo.point;
             impactObject.transform.rotation = Quaternion.LookRotation(hitInfo.normal);
             impactObject.SetActive(true);
 
+            if (targetHealth != null) {
+                
+                targetHealth.TakeDamage(weapon.Damage);
+            }
+
             ParticleSystem impactParticles = impactObject.GetComponent<ParticleSystem>();
             
             if (impactParticles != null) {
+                
                 impactParticles.Stop();
-                impactParticles.Play(); 
+                impactParticles.Play();
             }
         }
         
