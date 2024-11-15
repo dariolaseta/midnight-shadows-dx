@@ -32,8 +32,8 @@ public class GunManager : MonoBehaviour
 
     private void OnDisable() {
         
-        fireAction.action.canceled -= Shoot;
-        reloadAction.action.canceled -= Reload;
+        fireAction.action.performed -= Shoot;
+        reloadAction.action.performed -= Reload;
     }
 
     private void Init() {
