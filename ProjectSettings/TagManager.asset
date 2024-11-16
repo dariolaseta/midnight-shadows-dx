@@ -19,6 +19,7 @@ TagManager:
   - OldPicture
   - DocumentImg
   - ImageHolder
+  - AmmoCounter
   layers:
   - Default
   - TransparentFX

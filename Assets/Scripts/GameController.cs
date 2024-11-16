@@ -51,6 +51,9 @@ public class GameController : MonoBehaviour
 
     void Start() {
         
+        //DEBUG TODO REMOVE
+        Debug.Log($"Current State: {state}");
+        
         DontDestroyOnLoad(gameObject);
     }
 
@@ -120,12 +123,18 @@ public class GameController : MonoBehaviour
     }
 
     public void ChangeState(GameState newState) {
+        
+        //DEBUG
+        Debug.Log($"Changing State To: {state}");
 
         prevState = state;
         state = newState;
     }
 
     public void GoToPrevState() {
+        
+        //DEBUG
+        Debug.Log($"Returning to Previous State: {prevState}");
 
         state = prevState;
     }
@@ -224,7 +233,7 @@ public class GameController : MonoBehaviour
 
         SetSoundBehavior(true);
 
-        state = GameState.PAUSE;
+        ChangeState(GameState.PAUSE);
 
         pauseScreen.SetActive(true);
 

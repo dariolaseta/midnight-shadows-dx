@@ -1168,6 +1168,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 53195917512525363, guid: 9cc312a3eb7c9cc4c92e907f4d910294,
+        type: 3}
+      propertyPath: sfxPlayer
+      value: 
+      objectReference: {fileID: 907979466}
     - target: {fileID: 1790667325823776393, guid: 9cc312a3eb7c9cc4c92e907f4d910294,
         type: 3}
       propertyPath: objectiveText
@@ -1248,6 +1253,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9cc312a3eb7c9cc4c92e907f4d910294, type: 3}
+--- !u!82 &907979466 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6382697584786811654, guid: 384218229d0a46b47a43a0e7ef853d69,
+    type: 3}
+  m_PrefabInstance: {fileID: 599913238}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &930120289
 GameObject:
   m_ObjectHideFlags: 0

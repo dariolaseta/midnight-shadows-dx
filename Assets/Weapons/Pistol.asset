@@ -18,14 +18,13 @@ MonoBehaviour:
     type: 3}
   icon: {fileID: 0}
   damage: 10
+  magazineSize: 30
   maxAmmo: 12
   range: 3
-  attackSpeed: 5
-  reloadTime: 1
-  nextTimeToFire: 0
   fireRate: 15
-  shootSound: {fileID: 0}
-  reloadSound: {fileID: 0}
+  reloadTime: 1
+  shootSound: {fileID: 8300000, guid: 521482199847e5d47b090b1e3b99579b, type: 3}
+  reloadSound: {fileID: 8300000, guid: d7414fb4e888a3b4382b1fb754a10ec0, type: 3}
   muzzleFlash: {fileID: 0}
   bulletImpactEffect: {fileID: 2955623459812423941, guid: f5507a8c6a22c404ab324980c4e8a11b,
     type: 3}
