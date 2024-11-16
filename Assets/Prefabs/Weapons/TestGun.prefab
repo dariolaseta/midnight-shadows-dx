@@ -727,8 +727,9 @@ MonoBehaviour:
   shootingPointTransform: {fileID: 0}
   fireRange: 4
   fireRate: 3
-  maxAmmo: 0
   currentAmmo: 0
   reloadTime: 1
   weapon: {fileID: 11400000, guid: 057c92a430ed0494f8abb87406667d59, type: 2}
-  impactObject: {fileID: 0}
+  impactObject: {fileID: 7226583673155636401, guid: a2ab56839e1c9504ea9d141e95d0b16b,
+    type: 3}
+  muzzleFlash: {fileID: 0}

@@ -125,7 +125,7 @@ public class GameController : MonoBehaviour
     public void ChangeState(GameState newState) {
         
         //DEBUG
-        Debug.Log($"Changing State To: {state}");
+        Debug.Log($"Changing State To: {newState}");
 
         prevState = state;
         state = newState;
