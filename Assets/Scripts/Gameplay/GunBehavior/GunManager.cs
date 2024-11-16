@@ -24,6 +24,7 @@ public class GunManager : MonoBehaviour
     [SerializeField] GameObject impactObject;
     
     private ParticleSystem muzzleFlash;
+    private ParticleSystem impactParticles;
 
     private void Awake() {
         
@@ -37,6 +38,8 @@ public class GunManager : MonoBehaviour
     }
 
     private void Init() {
+        
+        impactParticles = impactObject.GetComponent<ParticleSystem>();
         
         fireAction.action.performed += Shoot;
         reloadAction.action.performed += Reload;
@@ -55,39 +58,42 @@ public class GunManager : MonoBehaviour
 
     private void Shoot(InputAction.CallbackContext obj) {
         
+        if (!CanShoot()) return;
+        
         Ray r = new Ray(shootingPointTransform.position, shootingPointTransform.forward);
         
         currentAmmo--;
+        
+        nextTimeToFire = Time.time + 1f / fireRate;
 
-        if (Physics.Raycast(r, out RaycastHit hitInfo, fireRange) && GameController.Instance.State == GameState.FREEROAM && Time.time >= nextTimeToFire) {
+        if (Physics.Raycast(r, out RaycastHit hitInfo, fireRange)) {
             
-            if (currentAmmo <= 0) return;
-            
-            HealthSystem targetHealth = hitInfo.collider.GetComponent<HealthSystem>();
-            
-            nextTimeToFire = Time.time + 1f / fireRate;
-            
-            Debug.Log("Shoot " + hitInfo.transform.name + " Current ammo: " + currentAmmo);
-            
-            impactObject.transform.position = hitInfo.point;
-            impactObject.transform.rotation = Quaternion.LookRotation(hitInfo.normal);
-            impactObject.SetActive(true);
-
-            if (targetHealth != null) {
-                
-                targetHealth.TakeDamage(weapon.Damage);
-            }
-
-            ParticleSystem impactParticles = impactObject.GetComponent<ParticleSystem>();
-            
-            if (impactParticles != null) {
-                
-                impactParticles.Stop();
-                impactParticles.Play();
-            }
+            HandleImpact(hitInfo);
         }
         
         Debug.DrawRay(r.origin, r.direction * fireRange, Color.green, 1f);
+    }
+
+    private bool CanShoot() {
+        
+        return currentAmmo > 0 &&
+               GameController.Instance.State == GameState.FREEROAM &&
+               Time.time >= nextTimeToFire;
+    }
+
+    private void HandleImpact(RaycastHit hitInfo) {
+        
+        impactObject.transform.position = hitInfo.point;
+        impactObject.transform.rotation = Quaternion.LookRotation(hitInfo.normal);
+        impactObject.SetActive(true);
+
+        impactParticles?.Stop();
+        impactParticles?.Play();
+
+        HealthSystem targetHealth = hitInfo.collider.GetComponent<HealthSystem>();
+        targetHealth?.TakeDamage(weapon.Damage);
+
+        Debug.Log($"Shoot {hitInfo.transform.name} Current ammo: {currentAmmo}");
     }
     
     // TODO implement
