@@ -32,8 +32,8 @@ public class GunManager : MonoBehaviour
     [SerializeField] Weapons weapon;
     
     [SerializeField] GameObject impactObject;
-    
-    private ParticleSystem muzzleFlash;
+    [SerializeField] GameObject muzzleFlash;
+            
     private ParticleSystem impactParticles;
 
     private TMP_Text ammoCounter;
@@ -68,7 +68,6 @@ public class GunManager : MonoBehaviour
         currentAmmo = weapon.MaxAmmo;
         magazineSize = weapon.MagazineSize;
         fireRange = weapon.Range;
-        muzzleFlash = weapon.MuzzleFlash;
         reloadTime = weapon.ReloadTime;
         shootSound = weapon.ShootSound;
         reloadSound = weapon.ReloadSound;
@@ -85,6 +84,8 @@ public class GunManager : MonoBehaviour
         if (!CanShoot()) return;
         
         Ray r = new Ray(shootingPointTransform.position, shootingPointTransform.forward);
+
+        StartCoroutine(ShowMuzzleFlash());
         
         currentAmmo--;
         
@@ -161,6 +162,16 @@ public class GunManager : MonoBehaviour
     private void UpdateAmmoCounterLabel() {
         
         ammoCounter.text = $"{currentAmmo} / {totalAmmo}";
+    }
+
+    private IEnumerator ShowMuzzleFlash() {
+        
+        //TODO Replace with animation
+        muzzleFlash.SetActive(true);
+        
+        yield return new WaitForSeconds(0.2f);
+        
+        muzzleFlash.SetActive(false);
     }
     
     // TODO implement
