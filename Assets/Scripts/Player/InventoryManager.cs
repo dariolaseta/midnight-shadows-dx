@@ -75,6 +75,7 @@ public class InventoryManager : MonoBehaviour
 
     private void InitializeSlots()
     {
+        slots.Clear();
         foreach (Transform child in slotsContainer)
         {
             slots.Add(child.GetComponent<RectTransform>());
