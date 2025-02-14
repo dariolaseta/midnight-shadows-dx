@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public enum GameState { FREEROAM, DIALOG, PAUSE, INVENTORY, CUTSCENE, OBTAIN_ITEM, SMARTPHONE, INSPECTING, DOCUMENT }
+public enum GameState { FREEROAM, DIALOG, PAUSE, INVENTORY, CUTSCENE, OBTAIN_ITEM, SMARTPHONE, INSPECTING, DOCUMENT, TEST }
 public class GameController : MonoBehaviour
 {
     public static GameController Instance { get; private set; }
@@ -177,20 +178,16 @@ public class GameController : MonoBehaviour
 
             inventoryScreen.SetActive(true);
 
-            EnableCursor();
-
             isInventoryOpen = true;
             
-            Inventory.Instance.ListItems();
+            InventoryManager.Instance.ListItems();
         } else if (isInventoryOpen && state == GameState.INVENTORY && Flags.Instance.IsFlagTrue("hasBackpack")) {
 
             inventoryScreen.SetActive(false);
 
             playerAnim.enabled = false;
 
-            Inventory.Instance.CleanContentItem();
-
-            DisableCursor();
+            InventoryManager.Instance.CleanContentItems();
 
             GoToPrevState();
 
