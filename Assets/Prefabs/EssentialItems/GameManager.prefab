@@ -61,6 +61,8 @@ MonoBehaviour:
     type: 3}
   pauseAction: {fileID: -6511589243379420518, guid: ad07a5bb4bf604a42aaf97a9f60d0091,
     type: 3}
+  openBackPack: {fileID: 8300000, guid: 9519e1ec59742084c80b3eaa21ee4a22, type: 3}
+  closeBackPack: {fileID: 8300000, guid: dd8e8d76b7df69247829aa9f4d8ce51b, type: 3}
   versionTxt: {fileID: 0}
 --- !u!114 &1790667325823776393
 MonoBehaviour:

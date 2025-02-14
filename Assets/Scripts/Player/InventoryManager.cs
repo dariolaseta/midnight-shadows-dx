@@ -34,6 +34,8 @@ public class InventoryManager : MonoBehaviour
     private Vector3 initialContainerPosition;
     
     private List<GameObject> itemPool = new List<GameObject>();
+
+    private static int _lastSelectedIndex = 0;
     
     private void Awake()
     {
@@ -62,11 +64,15 @@ public class InventoryManager : MonoBehaviour
         
         initialContainerPosition = slotsContainer.localPosition;
         
-        targetHorizontalPosition = slotsContainer.localPosition.x;
+        currentCenterIndex = Mathf.Clamp(_lastSelectedIndex, 0, Mathf.Max(0, inventory.Count - 1));
+        targetHorizontalPosition = -currentCenterIndex * GetSlotWidth();
+        slotsContainer.localPosition = new Vector3(targetHorizontalPosition, initialContainerPosition.y, initialContainerPosition.z);
     }
     
     private void OnDisable()
     {
+        _lastSelectedIndex = currentCenterIndex;
+        
         moveLeftAction.action.performed -= OnMoveLeft;
         moveRightAction.action.performed -= OnMoveRight;
         moveLeftAction.action.Disable();

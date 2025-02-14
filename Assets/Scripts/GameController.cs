@@ -17,6 +17,10 @@ public class GameController : MonoBehaviour
     [SerializeField] InputActionReference smartphoneAction;
     [SerializeField] InputActionReference smartphoneLightAction;
     [SerializeField] InputActionReference pauseAction;
+    
+    [Header("AudioClip")]
+    [SerializeField] private AudioClip openBackPack;
+    [SerializeField] private AudioClip closeBackPack;
 
     private Light smartphoneLight;
 
@@ -167,13 +171,16 @@ public class GameController : MonoBehaviour
             smartphoneLight.enabled = !smartphoneLight.enabled;
         }
     }
-
+    
+    //TODO: Move to other script
     private void OpenInventory(InputAction.CallbackContext obj) {
 
         if (!isInventoryOpen && state == GameState.FREEROAM && Flags.Instance.IsFlagTrue("hasBackpack")) {
 
             playerAnim.enabled = true;
-
+            
+            AudioManager.Instance.PlaySfx(openBackPack);
+            
             ChangeState(GameState.INVENTORY);
 
             inventoryScreen.SetActive(true);
@@ -184,7 +191,9 @@ public class GameController : MonoBehaviour
         } else if (isInventoryOpen && state == GameState.INVENTORY && Flags.Instance.IsFlagTrue("hasBackpack")) {
 
             inventoryScreen.SetActive(false);
-
+            
+            AudioManager.Instance.PlaySfx(closeBackPack);
+            
             playerAnim.enabled = false;
 
             InventoryManager.Instance.CleanContentItems();
