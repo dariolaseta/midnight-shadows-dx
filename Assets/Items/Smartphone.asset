@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Smartphone
   itemDescription: Il mio cellulare.
-  itemImage: {fileID: 21300000, guid: f35678fc26c5d4e4eb537fc426756d9a, type: 3}
+  value: 0
+  itemImage: {fileID: 21300000, guid: 12f18ab974ce60741bdfbb4ee66cccd2, type: 3}
   model: {fileID: 919132149155446097, guid: a85a934f087106c44a5978a7a3a72fac, type: 3}
+  itemType: 0

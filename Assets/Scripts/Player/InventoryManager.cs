@@ -79,7 +79,7 @@ public class InventoryManager : MonoBehaviour
         foreach (Transform child in slotsContainer)
         {
             slots.Add(child.GetComponent<RectTransform>());
-            child.localScale = Vector3.one;
+            //child.localScale = Vector3.one;
         }
         
         UpdateNameAndDescriptionText(currentCenterIndex);

@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Torcia
   itemDescription: La mia torcia personale.
-  itemImage: {fileID: 21300000, guid: 0c7bd154f0e2df64e9c0b4694ca1785a, type: 3}
+  value: 0
+  itemImage: {fileID: 21300000, guid: 23bd85f185138704285a132cfffe7cc5, type: 3}
   model: {fileID: 919132149155446097, guid: 51bc755640f59c9428de713e679703ac, type: 3}
+  itemType: 0
