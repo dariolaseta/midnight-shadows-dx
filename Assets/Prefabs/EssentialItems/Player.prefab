@@ -161,7 +161,6 @@ GameObject:
   - component: {fileID: 6382697584786811654}
   - component: {fileID: 4307413999100968809}
   - component: {fileID: 2525508531679578588}
-  - component: {fileID: 8660327786175319079}
   - component: {fileID: 8495472534475270155}
   - component: {fileID: 6739451514761884945}
   m_Layer: 0
@@ -357,23 +356,6 @@ MonoBehaviour:
   grabCursor: {fileID: 0}
   interactAction: {fileID: 2560874108361810365, guid: ad07a5bb4bf604a42aaf97a9f60d0091,
     type: 3}
---- !u!114 &8660327786175319079
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2943471214548508421}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b131598fab53334981aa7a4368d70f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventory: []
-  itemContent: {fileID: 0}
-  inventoryItem: {fileID: 5535157571968583698, guid: 2718cd37a29878b40965f8d99b0b7d95,
-    type: 3}
-  poolSize: 20
 --- !u!95 &8495472534475270155
 Animator:
   serializedVersion: 5

@@ -4470,7 +4470,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotsContainer: {fileID: 1053586918355308900}
   scrollSpeed: 25
-  scaleMultiplier: 1.5
+  scaleMultiplier: 2
   scaleTransitionSpeed: 5
   itemNameText: {fileID: 442264633469758579}
   itemDescriptionText: {fileID: 2707720468764910451}
