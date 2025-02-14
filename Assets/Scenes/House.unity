@@ -14303,8 +14303,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3483390852974656388, guid: 01d61e5bd9cde8d47a5ff1521a78b6b2,
         type: 3}
+      propertyPath: scrollSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 7f92238b2c79ef24c9a6f777c4859259, type: 3}
+    - target: {fileID: 3483390852974656388, guid: 01d61e5bd9cde8d47a5ff1521a78b6b2,
+        type: 3}
       propertyPath: inventory.Array.size
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3483390852974656388, guid: 01d61e5bd9cde8d47a5ff1521a78b6b2,
         type: 3}
@@ -14316,7 +14321,19 @@ PrefabInstance:
         type: 3}
       propertyPath: inventory.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: b7843654a0549f546b2b398408b145ca,
+      objectReference: {fileID: 11400000, guid: 914d1f3153c591f44992e9942a735e7a,
+        type: 2}
+    - target: {fileID: 3483390852974656388, guid: 01d61e5bd9cde8d47a5ff1521a78b6b2,
+        type: 3}
+      propertyPath: inventory.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: d73e3bb792afa044698ce6d76db481e8,
+        type: 2}
+    - target: {fileID: 3483390852974656388, guid: 01d61e5bd9cde8d47a5ff1521a78b6b2,
+        type: 3}
+      propertyPath: inventory.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 914d1f3153c591f44992e9942a735e7a,
         type: 2}
     - target: {fileID: 3964117535940470129, guid: 01d61e5bd9cde8d47a5ff1521a78b6b2,
         type: 3}

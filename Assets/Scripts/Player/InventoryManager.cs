@@ -28,6 +28,9 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private InputActionReference moveLeftAction;
     [SerializeField] private InputActionReference moveRightAction;
 
+    [Header("Audio")] 
+    [SerializeField] private AudioClip scrollSound;
+
     private List<RectTransform> slots = new List<RectTransform>();
     private float targetHorizontalPosition;
     private int currentCenterIndex;
@@ -109,6 +112,11 @@ public class InventoryManager : MonoBehaviour
 
     private void Scroll(int direction)
     {
+        if ((direction > 0 && currentCenterIndex != inventory.Count - 1) || (direction < 0 && currentCenterIndex != 0))
+        {
+            AudioManager.Instance.PlaySfx(scrollSound);
+        }
+        
         currentCenterIndex = Mathf.Clamp(currentCenterIndex + direction, 0, inventory.Count - 1);
         targetHorizontalPosition = -currentCenterIndex * GetSlotWidth();
         
