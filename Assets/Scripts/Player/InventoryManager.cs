@@ -187,4 +187,23 @@ public class InventoryManager : MonoBehaviour
             item.gameObject.SetActive(false);
         }
     }
+
+    public void AddItem(Items item)
+    {
+        inventory.Add(item);
+        
+        ObtainItemUI.Instance.ShowObtainingItemUI(item.ItemImage, item.ItemDescription);
+    }
+
+    public void RemoveItem(Items item)
+    {
+        if (inventory.Contains(item))
+        {
+            inventory.Remove(item);
+        }
+        else
+        {
+            Debug.Log("Oggetto non presente nell'inventario."); //TODO REMOVE
+        }
+    }
 }

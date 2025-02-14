@@ -8,7 +8,7 @@ public class ItemBehavior : MonoBehaviour, IInteractable
 
     public void Interact() {
 
-        Inventory.Instance.AddNewItem(item);
+        InventoryManager.Instance.AddItem(item);
 
         gameObject.SetActive(false);
     }

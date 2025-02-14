@@ -156,7 +156,7 @@ public class ObjectInspection : MonoBehaviour, IInteractable
             
             UIManager.Instance.ShowInstructions(false);
             
-            Inventory.Instance.AddNewItem(item);
+            InventoryManager.Instance.AddItem(item);
 
             StartCoroutine(UIManager.Instance.ShowObtainedText(item.name, gameObject));
         }
