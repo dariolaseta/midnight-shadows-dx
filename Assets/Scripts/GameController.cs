@@ -39,19 +39,11 @@ public class GameController : MonoBehaviour
     private GameState prevState;
     public GameState State => state;
 
-    // DEBUG
-    [SerializeField] TMP_Text versionTxt;
-
-    private const string BuildStatus = "Alpha v.";
-
     void Awake() {
 
         CreateInstance();
 
         ObtainComponents();
-
-        //DEBUG
-        GetProjectVersion();
     }
 
     void Start() {
@@ -120,11 +112,6 @@ public class GameController : MonoBehaviour
         smartphoneLight = smartphoneAnim.GetComponentInChildren<Light>();
         smartphoneLight.enabled = false;
         smartphoneAnim.gameObject.SetActive(false);
-    }
-
-    private void GetProjectVersion() {
-        
-        versionTxt.text = BuildStatus + " " + Application.version;
     }
 
     public void ChangeState(GameState newState) {
