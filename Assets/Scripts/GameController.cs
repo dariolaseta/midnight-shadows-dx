@@ -174,7 +174,7 @@ public class GameController : MonoBehaviour
 
             isInventoryOpen = true;
             
-            InventoryManager.Instance.ListItems();
+            InventoryManager.Instance.OnEnableInventory();
         } else if (isInventoryOpen && state == GameState.INVENTORY && Flags.Instance.IsFlagTrue("hasBackpack")) {
 
             inventoryScreen.SetActive(false);
@@ -183,7 +183,7 @@ public class GameController : MonoBehaviour
             
             playerAnim.enabled = false;
 
-            InventoryManager.Instance.CleanContentItems();
+            InventoryManager.Instance.OnDisableInventory();
 
             GoToPrevState();
 

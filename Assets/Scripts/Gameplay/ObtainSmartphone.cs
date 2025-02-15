@@ -11,6 +11,8 @@ public class ObtainSmartphone : MonoBehaviour, IInteractable
         Flags.Instance.SetFlags("hasSmartphone", true);
 
         StartCoroutine(UIManager.Instance.ShowStoryItemObtainText(item, gameObject));
+        
+        InventoryManager.Instance.AddItem(item);
 
         MeshRenderer[] renderers = gameObject.GetComponentsInChildren<MeshRenderer>();
 

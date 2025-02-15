@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditorInternal.VersionControl;
 using UnityEngine.InputSystem;
 
 public class InventoryManager : MonoBehaviour
@@ -14,6 +15,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private float scrollSpeed = 25f;
     [SerializeField] private float scaleMultiplier = 1.5f;
     [SerializeField] private float scaleTransitionSpeed = 5f;
+    [SerializeField] private GameObject inventoryUI;
     
     [Header("Text")]
     [SerializeField] private TMP_Text itemNameText;
@@ -53,8 +55,10 @@ public class InventoryManager : MonoBehaviour
         Instance = this;
     }
 
-    private void OnEnable()
+    public void OnEnableInventory()
     {
+        inventoryUI.SetActive(true);
+        
         slotsContainer.localPosition = initialContainerPosition;
         targetHorizontalPosition = initialContainerPosition.x;
         
@@ -70,16 +74,22 @@ public class InventoryManager : MonoBehaviour
         currentCenterIndex = Mathf.Clamp(_lastSelectedIndex, 0, Mathf.Max(0, inventory.Count - 1));
         targetHorizontalPosition = -currentCenterIndex * GetSlotWidth();
         slotsContainer.localPosition = new Vector3(targetHorizontalPosition, initialContainerPosition.y, initialContainerPosition.z);
+        
+        ListItems();
     }
     
-    private void OnDisable()
+    public void OnDisableInventory()
     {
+        inventoryUI.SetActive(false);
+        
         _lastSelectedIndex = currentCenterIndex;
         
         moveLeftAction.action.performed -= OnMoveLeft;
         moveRightAction.action.performed -= OnMoveRight;
         moveLeftAction.action.Disable();
         moveRightAction.action.Disable();
+        
+        CleanContentItems();
     }
 
     private void InitializeSlots()
@@ -166,7 +176,7 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void ListItems()
+    private void ListItems()
     {
         foreach (GameObject obj in itemPool)
         {
@@ -194,7 +204,7 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void CleanContentItems()
+    private void CleanContentItems()
     {
         foreach (Transform item in slotsContainer)
         {
