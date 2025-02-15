@@ -54,6 +54,14 @@ public class AchievementSystem : MonoBehaviour
 
     public IEnumerator UnlockAchievement(Achievement achievement)
     {
+        if (IsAchievementUnlocked(achievement.AchievementID.ToString()))
+        {
+            yield break;
+        }
+        
+        PlayerPrefs.SetInt(achievement.AchievementID.ToString(), 1);
+        PlayerPrefs.Save();
+        
         achievementRect.anchoredPosition = hiddenPosition;
         achievementImg.gameObject.SetActive(true);
     
@@ -87,7 +95,10 @@ public class AchievementSystem : MonoBehaviour
         });
         
         yield return exitSequence.WaitForCompletion();
+    }
 
-        // TODO: SAVE ACHIEVEMENT UNLOCK
+    public bool IsAchievementUnlocked(string achievementId)
+    {
+        return PlayerPrefs.GetInt(achievementId, 0) == 1;
     }
 }
