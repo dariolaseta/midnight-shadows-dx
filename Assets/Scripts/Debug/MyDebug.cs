@@ -6,16 +6,30 @@ using UnityEngine;
 
 public class MyDebug : MonoBehaviour
 {
+    public static MyDebug Instance { get; private set; }
+    
+    [Header("Version")]
     [SerializeField] TMP_Text versionTxt;
 
     private const string BuildStatus = "Alpha v.";
     
+    [Header("Achievemenets")]
     [SerializeField] private Achievement achievement;
-    
     [SerializeField] private List<Achievement> achievements = new List<Achievement>();
+    
+    [Header("Game States")]
+    [SerializeField] private TMP_Text currentGameStateText;
     
     private void Awake()
     {
+        if (Instance != null && Instance != this) {
+
+            Destroy(this);
+            return;
+        }
+
+        Instance = this;
+        
         GetProjectVersion();
     }
 
@@ -51,5 +65,10 @@ public class MyDebug : MonoBehaviour
             
             Debug.Log("Unlocked all achievements");
         }
+    }
+
+    public void UpdateGameStateText(string currentState)
+    {
+        currentGameStateText.text = $"Current state: {currentState}";
     }
 }

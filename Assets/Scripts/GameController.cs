@@ -49,7 +49,7 @@ public class GameController : MonoBehaviour
     void Start() {
         
         //DEBUG TODO REMOVE
-        Debug.Log($"Current State: {state}");
+        MyDebug.Instance.UpdateGameStateText(state.ToString());
         
         DontDestroyOnLoad(gameObject);
     }
@@ -116,19 +116,19 @@ public class GameController : MonoBehaviour
 
     public void ChangeState(GameState newState) {
         
-        //DEBUG
-        Debug.Log($"Changing State To: {newState}");
-
         prevState = state;
         state = newState;
+        
+        //DEBUG
+        MyDebug.Instance.UpdateGameStateText(state.ToString());
     }
 
     public void GoToPrevState() {
         
-        //DEBUG
-        Debug.Log($"Returning to Previous State: {prevState}");
-
         state = prevState;
+        
+        //DEBUG
+        MyDebug.Instance.UpdateGameStateText(state.ToString()); //TODO: CHANGE WITH EVENT
     }
 
     private void SmartphoneBeheavior(InputAction.CallbackContext obj) {
