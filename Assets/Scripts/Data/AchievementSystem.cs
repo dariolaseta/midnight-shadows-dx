@@ -1,8 +1,10 @@
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 public class AchievementSystem : MonoBehaviour
@@ -36,6 +38,11 @@ public class AchievementSystem : MonoBehaviour
         }
 
         Instance = this;
+
+        if (SceneManager.GetActiveScene().name == "MainMenu")
+        {
+            return;
+        }
         
         achievementImg.gameObject.SetActive(false);
 
@@ -70,7 +77,7 @@ public class AchievementSystem : MonoBehaviour
         achievementRect.DOAnchorPos(originalPosition, slideInDuration)
             .SetEase(slideInEase);
         
-        achievementName.text = achievement.AchivementName;
+        achievementName.text = achievement.AchievementName;
         achievementIcon.sprite = achievement.AchievementIcon;
         
         achievementRect.DOAnchorPos(originalPosition, slideInDuration)

@@ -9,8 +9,10 @@ using UnityEngine.UI;
 
 public class SettingsMenu : MonoBehaviour
 {
-    [SerializeField] GameObject mainMenu;
-    [SerializeField] GameObject settingsMenu;
+    [SerializeField] private GameObject mainMenu;
+    [SerializeField] private GameObject settingsMenu;
+    [SerializeField] private GameObject extraMenu;
+    [SerializeField] private GameObject achievementsMenu;
 
     [SerializeField] Toggle fullscreenToggle;
     [SerializeField] Toggle vsyncToggle;
@@ -106,6 +108,7 @@ public class SettingsMenu : MonoBehaviour
         mainMenu.SetActive(true);
 
         settingsMenu.SetActive(false);
+        extraMenu.SetActive(false);
     }
 
     public void ResLeft() {
@@ -136,6 +139,30 @@ public class SettingsMenu : MonoBehaviour
         QualitySettings.vSyncCount = vsyncToggle.isOn ? 1 : 0;
 
         Screen.SetResolution(resolutions[selectedResolution].horizontal, resolutions[selectedResolution].vertical, fullscreenToggle.isOn);
+    }
+
+    public void ShowExtraMenu()
+    {
+        mainMenu.SetActive(false);
+        extraMenu.SetActive(true);
+    }
+
+    public void BackToMainMenuFromExtraMenu()
+    {
+        mainMenu.SetActive(true);
+        extraMenu.SetActive(false);
+    }
+
+    public void ShowAchievementsMenu()
+    {
+        extraMenu.SetActive(false);
+        achievementsMenu.SetActive(true);
+    }
+    
+    public void BackToExtraMenuFromAchievementsMenu()
+    {
+        extraMenu.SetActive(true);
+        achievementsMenu.SetActive(false);
     }
 }
 

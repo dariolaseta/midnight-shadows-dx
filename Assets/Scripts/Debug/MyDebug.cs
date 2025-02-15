@@ -12,6 +12,8 @@ public class MyDebug : MonoBehaviour
     
     [SerializeField] private Achievement achievement;
     
+    [SerializeField] private List<Achievement> achievements = new List<Achievement>();
+    
     private void Awake()
     {
         GetProjectVersion();
@@ -19,7 +21,8 @@ public class MyDebug : MonoBehaviour
 
     private void Update()
     {
-        DebugAchievements();
+        //UnlockAllAchievements();
+        //DebugAchievements();
     }
 
     private void GetProjectVersion() 
@@ -32,6 +35,21 @@ public class MyDebug : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.L))
         {
             StartCoroutine(AchievementSystem.Instance.UnlockAchievement(achievement));
+        }
+    }
+
+    private void UnlockAllAchievements()
+    {
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            foreach (Achievement achievement in achievements)
+            {
+                PlayerPrefs.SetInt(achievement.AchievementID.ToString(), 1);
+                PlayerPrefs.Save();
+            }
+            
+            Debug.Log("Unlocked all achievements");
         }
     }
 }

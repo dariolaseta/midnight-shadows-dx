@@ -14,8 +14,8 @@ public class Achievement : ScriptableObject
     
     [SerializeField] private Sprite achievementIcon;
     
-    public string AchivementName => achievementName;
-    public string AchivementDescription => achievementDescription;
+    public string AchievementName => achievementName;
+    public string AchievementDescription => achievementDescription;
     public string LockedAchievementName => lockedAchievementName;
     public string LockedAchievementDescription => lockedAchievementDescription;
     
