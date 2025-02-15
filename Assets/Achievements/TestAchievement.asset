@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baa9178a49071c2448fba801c09a14cc, type: 3}
   m_Name: TestAchievement
   m_EditorClassIdentifier: 
+  achievementID: 0
   achievementName: TestAchivement
   achievementDescription: Sono un achievement!
+  lockedAchievementName: ???
+  lockedAchievementDescription: ???
   achievementIcon: {fileID: 21300000, guid: 6e755b8871a93ef4abd7e551e18f4280, type: 3}

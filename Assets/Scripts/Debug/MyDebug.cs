@@ -19,14 +19,19 @@ public class MyDebug : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            StartCoroutine(AchievementSystem.Instance.UnlockAchievement(achievement));
-        }
+        DebugAchievements();
     }
 
     private void GetProjectVersion() 
     {
         versionTxt.text = BuildStatus + " " + Application.version;
+    }
+
+    private void DebugAchievements()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            StartCoroutine(AchievementSystem.Instance.UnlockAchievement(achievement));
+        }
     }
 }

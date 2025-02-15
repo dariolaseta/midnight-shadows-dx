@@ -3456,7 +3456,6 @@ GameObject:
   - component: {fileID: 6647068272520771758}
   - component: {fileID: 6688796214181581669}
   - component: {fileID: 5302202692859900400}
-  - component: {fileID: 5081012084998768272}
   m_Layer: 5
   m_Name: Achievement
   m_TagString: Untagged
@@ -3482,7 +3481,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -226.9856, y: -82}
+  m_AnchoredPosition: {x: -226.9856, y: 75}
   m_SizeDelta: {x: 453.9712, y: 141.6437}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6688796214181581669
@@ -3523,27 +3522,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!95 &5081012084998768272
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6063579701890488230}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: fb91934c2a2243e40a06d7d4a8f65c4d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6243282493320226532
 GameObject:
   m_ObjectHideFlags: 0
@@ -3905,7 +3883,12 @@ MonoBehaviour:
   achievementIcon: {fileID: 3785892469072519187}
   achievementName: {fileID: 4195315611700416987}
   achievementSound: {fileID: 8300000, guid: 94f98f2264a5a4c40ac72b99dfb45e42, type: 3}
-  animator: {fileID: 5081012084998768272}
+  slideInDuration: 0.7
+  slideOutDuration: 0.5
+  visibleDuration: 3
+  slideInOffset: 200
+  slideInEase: 27
+  slideOutEase: 8
 --- !u!1 &6950532442057358089
 GameObject:
   m_ObjectHideFlags: 0
