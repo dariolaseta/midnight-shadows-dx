@@ -212,11 +212,14 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void AddItem(Items item)
+    public void AddItem(Items item, bool showObtainUI = true)
     {
         inventory.Add(item);
-        
-        ObtainItemUI.Instance.ShowObtainingItemUI(item.ItemImage, item.ItemDescription);
+
+        if (showObtainUI)
+        {
+            ObtainItemUI.Instance.ShowObtainingItemUI(item.ItemImage, item.ItemDescription);
+        }
     }
 
     public void RemoveItem(Items item)

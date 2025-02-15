@@ -12,7 +12,7 @@ public class ObtainSmartphone : MonoBehaviour, IInteractable
 
         StartCoroutine(UIManager.Instance.ShowStoryItemObtainText(item, gameObject));
         
-        InventoryManager.Instance.AddItem(item);
+        InventoryManager.Instance.AddItem(item, false);
 
         MeshRenderer[] renderers = gameObject.GetComponentsInChildren<MeshRenderer>();
 
