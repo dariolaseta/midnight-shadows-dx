@@ -5003,7 +5003,13 @@ MonoBehaviour:
     type: 3}
   moveRightAction: {fileID: -3853037371330870512, guid: ad07a5bb4bf604a42aaf97a9f60d0091,
     type: 3}
+  selectAction: {fileID: 8041528596854320640, guid: ad07a5bb4bf604a42aaf97a9f60d0091,
+    type: 3}
+  openInventoryAction: {fileID: -905013568239412088, guid: ad07a5bb4bf604a42aaf97a9f60d0091,
+    type: 3}
   scrollSound: {fileID: 8300000, guid: 7f92238b2c79ef24c9a6f777c4859259, type: 3}
+  openInventorySound: {fileID: 8300000, guid: 9519e1ec59742084c80b3eaa21ee4a22, type: 3}
+  closeInventorySound: {fileID: 8300000, guid: dd8e8d76b7df69247829aa9f4d8ce51b, type: 3}
 --- !u!1 &8837792448314888801
 GameObject:
   m_ObjectHideFlags: 0

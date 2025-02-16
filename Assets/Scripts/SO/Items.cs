@@ -20,7 +20,8 @@ public class Items : ScriptableObject
     public enum ItemType
     {
         Shrimp,
-        Heal
+        Heal,
+        Other
     }
 
     public string ItemName => itemName;

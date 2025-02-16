@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEditorInternal.VersionControl;
 using UnityEngine.InputSystem;
 
@@ -29,9 +30,18 @@ public class InventoryManager : MonoBehaviour
     [Header("Input")]
     [SerializeField] private InputActionReference moveLeftAction;
     [SerializeField] private InputActionReference moveRightAction;
+    [SerializeField] private InputActionReference selectAction;
+    [SerializeField] private InputActionReference openInventoryAction;
 
     [Header("Audio")] 
     [SerializeField] private AudioClip scrollSound;
+    [SerializeField] private AudioClip openInventorySound;
+    [SerializeField] private AudioClip closeInventorySound;
+
+    private Items pendingItemCheck;
+    private Action<bool> itemCheckCallback;
+    
+    private bool isInventoryOpen = false;
 
     private List<RectTransform> slots = new List<RectTransform>();
     private float targetHorizontalPosition;
@@ -53,19 +63,26 @@ public class InventoryManager : MonoBehaviour
         }
 
         Instance = this;
+        
+        openInventoryAction.action.Enable();
+        openInventoryAction.action.performed += OpenInventory;
     }
 
-    public void OnEnableInventory()
+    private void OnDestroy()
+    {
+        openInventoryAction.action.performed -= OpenInventory;
+        openInventoryAction.action.Disable();
+        UnsubscribeFromEvents();
+    }
+
+    private void OnEnableInventory()
     {
         inventoryUI.SetActive(true);
         
+        SubscribeToEvents();
+        
         slotsContainer.localPosition = initialContainerPosition;
         targetHorizontalPosition = initialContainerPosition.x;
-        
-        moveLeftAction.action.Enable();
-        moveRightAction.action.Enable();
-        moveLeftAction.action.performed += OnMoveLeft;
-        moveRightAction.action.performed += OnMoveRight;
 
         InitializeSlots();
         
@@ -77,17 +94,118 @@ public class InventoryManager : MonoBehaviour
         
         ListItems();
     }
-    
-    public void OnDisableInventory()
+
+    private void OpenInventory(InputAction.CallbackContext obj)
+    {
+        if (!Flags.Instance.IsFlagTrue("hasBackpack")) return;
+
+        if (ShouldOpenInventory())
+        {
+            OpenInventoryInternal();
+        } else if (ShouldCloseInventory())
+        {
+            CloseInventoryInternal();
+        }
+    }
+
+    private bool ShouldOpenInventory()
+    {
+        return !isInventoryOpen &&
+               GameController.Instance.State == GameState.FREEROAM;
+    }
+
+    private bool ShouldCloseInventory()
+    {
+        return isInventoryOpen &&
+               GameController.Instance.State == GameState.INVENTORY;
+    }
+
+    private void OpenInventoryInternal()
+    {
+        AudioManager.Instance.PlaySfx(openInventorySound);
+        GameController.Instance.ChangeState(GameState.INVENTORY);
+        isInventoryOpen = true;
+        OnEnableInventory();
+    }
+
+    private void CloseInventoryInternal()
+    {
+        AudioManager.Instance.PlaySfx(closeInventorySound);
+        isInventoryOpen = false;
+        OnDisableInventory();
+        GameController.Instance.GoToPrevState();
+    }
+
+    private void OnSelect(InputAction.CallbackContext obj)
+    {
+        if (GameController.Instance.State != GameState.USE_ITEM)
+        {
+            GameController.Instance.GoToPrevState();
+            
+            DialogueSystem.Instance.SetDialogue("Non mi serve ora");
+            StartCoroutine(DialogueSystem.Instance.ShowDialogue());
+
+            CloseInventoryInternal();
+            
+            return;
+        }
+
+        if (inventory.Count == 0)
+        {
+            DialogueSystem.Instance.SetDialogue("Non ho oggetti nello zaino");
+            StartCoroutine(DialogueSystem.Instance.ShowDialogue());
+            return;
+        }
+        
+        Items selectedItem = inventory[currentCenterIndex];
+        bool isCorrectItem = selectedItem == pendingItemCheck;
+
+        if (isCorrectItem)
+        {
+            RemoveItem(selectedItem);
+            ListItems();
+            UpdateNameAndDescriptionText(currentCenterIndex);
+        }
+        
+        itemCheckCallback?.Invoke(isCorrectItem);
+        ResetItemCheck();
+    }
+
+    private void ResetItemCheck()
+    {
+        pendingItemCheck = null;
+        itemCheckCallback = null;
+        GameController.Instance.GoToPrevState();
+        CloseInventoryInternal();
+    }
+
+    private void SubscribeToEvents()
+    {
+        moveLeftAction.action.Enable();
+        moveRightAction.action.Enable();
+        selectAction.action.Enable();
+        moveLeftAction.action.performed += OnMoveLeft;
+        moveRightAction.action.performed += OnMoveRight;
+        selectAction.action.performed += OnSelect;
+    }
+
+    private void UnsubscribeFromEvents()
+    {
+        moveLeftAction.action.performed -= OnMoveLeft;
+        moveRightAction.action.performed -= OnMoveRight;
+        selectAction.action.performed -= OnSelect;
+        moveLeftAction.action.Disable();
+        moveRightAction.action.Disable();
+        selectAction.action.Disable();
+    }
+
+    private void OnDisableInventory()
     {
         inventoryUI.SetActive(false);
         
-        _lastSelectedIndex = currentCenterIndex;
+        UnsubscribeFromEvents();
         
-        moveLeftAction.action.performed -= OnMoveLeft;
-        moveRightAction.action.performed -= OnMoveRight;
-        moveLeftAction.action.Disable();
-        moveRightAction.action.Disable();
+        _lastSelectedIndex = currentCenterIndex;
         
         CleanContentItems();
     }
@@ -232,5 +350,13 @@ public class InventoryManager : MonoBehaviour
         {
             Debug.Log("Oggetto non presente nell'inventario."); //TODO REMOVE
         }
+    }
+
+    public void StartUseItem(Items requiredItem, Action<bool> callback)
+    {
+        pendingItemCheck = requiredItem;
+        itemCheckCallback = callback;
+        GameController.Instance.ChangeState(GameState.USE_ITEM);
+        OnEnableInventory();
     }
 }
