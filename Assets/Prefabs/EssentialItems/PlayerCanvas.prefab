@@ -568,7 +568,6 @@ RectTransform:
   - {fileID: 8281099146527456905}
   - {fileID: 2404925418203727491}
   - {fileID: 6038045198882780301}
-  - {fileID: 8224170168775513551}
   - {fileID: 8738548017776201082}
   - {fileID: 4142055675843764319}
   - {fileID: 4555560502953239533}
@@ -579,6 +578,7 @@ RectTransform:
   - {fileID: 7083404614260984995}
   - {fileID: 1407488654880917662}
   - {fileID: 9023519962414371016}
+  - {fileID: 8224170168775513551}
   - {fileID: 8739108372555690515}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1384,7 +1384,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &3045041134087760220
@@ -1517,6 +1517,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingsMenu: {fileID: 8956711501818140727}
+  sceneIndexToLoad: 0
 --- !u!1 &3527580827512437892
 GameObject:
   m_ObjectHideFlags: 0
@@ -1658,7 +1659,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: QUIT
+  m_text: BACK TO MAIN MENU
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 31bda548a29ee2e4f8f1d9334c2670cd, type: 2}
   m_sharedMaterial: {fileID: 1793919239103322770, guid: 31bda548a29ee2e4f8f1d9334c2670cd,
@@ -1725,7 +1726,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &3628230141907216554
@@ -2816,7 +2817,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &5238206954936095651
@@ -2951,7 +2952,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &5267481934184286591

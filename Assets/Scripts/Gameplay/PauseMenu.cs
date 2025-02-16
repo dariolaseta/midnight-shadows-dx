@@ -1,26 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    [SerializeField] GameObject settingsMenu;
+    [SerializeField] private GameObject settingsMenu;
+    
+    [SerializeField] private int sceneIndexToLoad = 0;
 
-    public void ReturnToGame() {
-
+    public void ReturnToGame() 
+    {
         GameController.Instance.Resume();
     }
 
-    public void ShowSettings() {
-
+    public void ShowSettings() 
+    {
         settingsMenu.SetActive(true);
 
         gameObject.SetActive(false);
     }
 
-    public void QuitGame() {
-
-        //TODO: Change to load main menu
-        Application.Quit();
+    public void QuitGame() 
+    {
+        SceneManager.LoadScene(sceneIndexToLoad);
     }
 }
