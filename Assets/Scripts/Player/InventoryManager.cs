@@ -21,6 +21,7 @@ public class InventoryManager : MonoBehaviour
     [Header("Text")]
     [SerializeField] private TMP_Text itemNameText;
     [SerializeField] private TMP_Text itemDescriptionText;
+    [SerializeField] private TMP_Text emptyText;
     
     [Header("Inventory")]
     [SerializeField] private List<Items> inventory = new List<Items>();
@@ -77,6 +78,8 @@ public class InventoryManager : MonoBehaviour
 
     private void OnEnableInventory()
     {
+        emptyText.enabled = inventory.Count <= 0;
+        
         inventoryUI.SetActive(true);
         
         SubscribeToEvents();
@@ -117,7 +120,8 @@ public class InventoryManager : MonoBehaviour
     private bool ShouldCloseInventory()
     {
         return isInventoryOpen &&
-               GameController.Instance.State == GameState.INVENTORY;
+               (GameController.Instance.State == GameState.INVENTORY ||
+                GameController.Instance.State == GameState.USE_ITEM);
     }
 
     private void OpenInventoryInternal()
@@ -163,6 +167,7 @@ public class InventoryManager : MonoBehaviour
         if (isCorrectItem)
         {
             RemoveItem(selectedItem);
+            currentCenterIndex = Mathf.Clamp(currentCenterIndex, 0, Mathf.Max(0, inventory.Count - 1));
             ListItems();
             UpdateNameAndDescriptionText(currentCenterIndex);
         }
@@ -240,6 +245,8 @@ public class InventoryManager : MonoBehaviour
 
     private void Scroll(int direction)
     {
+        if (inventory.Count <= 0) return;
+        
         if ((direction > 0 && currentCenterIndex != inventory.Count - 1) || (direction < 0 && currentCenterIndex != 0))
         {
             AudioManager.Instance.PlaySfx(scrollSound);
@@ -253,6 +260,14 @@ public class InventoryManager : MonoBehaviour
 
     private void UpdateNameAndDescriptionText(int currentItemIndex)
     {
+        if (inventory.Count == 0 || currentItemIndex < 0 || currentItemIndex >= inventory.Count)
+        {
+            itemNameText.text = "";
+            itemDescriptionText.text = "";
+            
+            return;
+        }
+        
         itemNameText.text = inventory[currentItemIndex].ItemName;
         itemDescriptionText.text = inventory[currentItemIndex].ItemDescription;
     }
@@ -354,9 +369,16 @@ public class InventoryManager : MonoBehaviour
 
     public void StartUseItem(Items requiredItem, Action<bool> callback)
     {
+        isInventoryOpen = true;
+        
         pendingItemCheck = requiredItem;
         itemCheckCallback = callback;
         GameController.Instance.ChangeState(GameState.USE_ITEM);
         OnEnableInventory();
+    }
+
+    public int CheckInventorySize()
+    {
+        return inventory.Count;
     }
 }

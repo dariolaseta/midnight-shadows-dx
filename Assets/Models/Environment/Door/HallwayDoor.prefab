@@ -145,6 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredItem: {fileID: 11400000, guid: 6a4cf5a99ac374e46b6bf4cec6948bc6, type: 2}
+  successSound: {fileID: 8300000, guid: 9d13724306f8f204a8a6b903f7e5f84c, type: 3}
 --- !u!1 &3316603413961957743
 GameObject:
   m_ObjectHideFlags: 0

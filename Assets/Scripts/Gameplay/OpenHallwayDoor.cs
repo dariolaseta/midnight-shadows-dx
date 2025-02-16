@@ -4,11 +4,22 @@ using UnityEngine;
 
 public class OpenHallwayDoor : MonoBehaviour, IInteractable
 {
-    [Header("References")] 
+    [Header("Required Item")] 
     [SerializeField] private Items requiredItem;
+    
+    [Header("Audio")]
+    [SerializeField] private AudioClip successSound;
 
     public void Interact()
     {
+        if (!Flags.Instance.IsFlagTrue("hasBackpack"))
+        {
+            DialogueSystem.Instance.SetDialogue("Non si apre. Dove ho lasciato la chiave?");
+            StartCoroutine(DialogueSystem.Instance.ShowDialogue());
+            
+            return;
+        }
+        
         InventoryManager.Instance.StartUseItem(
             requiredItem,
             (success) =>
@@ -21,6 +32,9 @@ public class OpenHallwayDoor : MonoBehaviour, IInteractable
 
     private void OpenDoor()
     {
+        if (successSound)
+            AudioManager.Instance.PlaySfx(successSound);
+        
         Debug.Log("Opening door...");
     }
 
