@@ -108,7 +108,6 @@ public class SettingsMenu : MonoBehaviour
         mainMenu.SetActive(true);
 
         settingsMenu.SetActive(false);
-        extraMenu.SetActive(false);
     }
 
     public void ResLeft() {
