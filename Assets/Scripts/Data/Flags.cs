@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum FlagEnum { HAS_BACKPACK, HAS_TORCH, HAS_SMARTPHONE }
 public class Flags : MonoBehaviour
 {
     public static Flags Instance { get; private set; }
@@ -28,24 +30,25 @@ public class Flags : MonoBehaviour
 
     private void InitializeFlags() {
 
-        flags["hasBackpack"] = false;
-        flags["hasTorch"] = false;
-        flags["hasSmartphone"] = false;
+        foreach (var flag in Enum.GetValues(typeof(FlagEnum)))
+        {
+            flags[flag.ToString()] = false;
+        }
     }
 
-    public bool GetFlag(string flagName) {
+    public bool GetFlag(FlagEnum flagName) {
 
-        if (flags.ContainsKey(flagName)) return flags[flagName];
+        if (flags.ContainsKey(flagName.ToString())) return flags[flagName.ToString()];
         else return false;
     }
 
-    public void SetFlags(string flagName, bool value) {
+    public void SetFlags(FlagEnum flagName, bool value) {
 
-        if (flags.ContainsKey(flagName)) flags[flagName] = value;
+        if (flags.ContainsKey(flagName.ToString())) flags[flagName.ToString()] = value;
     }
 
-    public bool IsFlagTrue(string flagName) {
+    public bool IsFlagTrue(FlagEnum flagName) {
 
-        return flags.ContainsKey(flagName) && flags[flagName];
+        return flags.ContainsKey(flagName.ToString()) && flags[flagName.ToString()];
     }
 }

@@ -10,7 +10,7 @@ public class ObtainBackpack : MonoBehaviour, IInteractable
 
     public void Interact() {
         
-        Flags.Instance.SetFlags("hasBackpack", true);
+        Flags.Instance.SetFlags(FlagEnum.HAS_BACKPACK, true);
 
         playerBackPack.SetActive(true);
 

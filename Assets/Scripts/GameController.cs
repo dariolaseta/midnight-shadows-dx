@@ -123,16 +123,16 @@ public class GameController : MonoBehaviour
     private void SmartphoneBeheavior(InputAction.CallbackContext obj) 
     {
         // TODO: MOVE TO SMARTPHONE SCRIPT        
-        if (!Flags.Instance.IsFlagTrue("hasSmartphone")) return;
+        if (!Flags.Instance.IsFlagTrue(FlagEnum.HAS_SMARTPHONE)) return;
 
-        if (state == GameState.FREEROAM && Flags.Instance.IsFlagTrue("hasSmartphone") && !isSmartphoneOn) {
+        if (state == GameState.FREEROAM && Flags.Instance.IsFlagTrue(FlagEnum.HAS_SMARTPHONE) && !isSmartphoneOn) {
 
             smartphoneAnim.gameObject.SetActive(true);
 
             smartphoneAnim.SetTrigger("ON");
 
             isSmartphoneOn = true;
-        } else if (state == GameState.FREEROAM && Flags.Instance.IsFlagTrue("hasSmartphone") && isSmartphoneOn) {
+        } else if (state == GameState.FREEROAM && Flags.Instance.IsFlagTrue(FlagEnum.HAS_SMARTPHONE) && isSmartphoneOn) {
             
             smartphoneLight.enabled = false;
             smartphoneAnim.SetTrigger("Close");

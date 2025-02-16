@@ -12,7 +12,7 @@ public class OpenHallwayDoor : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        if (!Flags.Instance.IsFlagTrue("hasBackpack"))
+        if (!Flags.Instance.IsFlagTrue(FlagEnum.HAS_BACKPACK))
         {
             DialogueSystem.Instance.SetDialogue("Non si apre. Dove ho lasciato la chiave?");
             StartCoroutine(DialogueSystem.Instance.ShowDialogue());

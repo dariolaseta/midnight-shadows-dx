@@ -17,7 +17,7 @@ public class ItemBehavior : MonoBehaviour, IInteractable
 
     public void Interact() 
     {
-        if (!Flags.Instance.IsFlagTrue("hasBackpack"))
+        if (!Flags.Instance.IsFlagTrue(FlagEnum.HAS_BACKPACK))
         {
             DialogueSystem.Instance.SetDialogue("Devo prima prendere il mio zaino");
             StartCoroutine(DialogueSystem.Instance.ShowDialogue());

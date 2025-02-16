@@ -8,7 +8,7 @@ public class ObtainSmartphone : MonoBehaviour, IInteractable
 
     public void Interact() {
 
-        Flags.Instance.SetFlags("hasSmartphone", true);
+        Flags.Instance.SetFlags(FlagEnum.HAS_SMARTPHONE, true);
 
         StartCoroutine(UIManager.Instance.ShowStoryItemObtainText(item, gameObject));
         

@@ -100,7 +100,7 @@ public class InventoryManager : MonoBehaviour
 
     private void OpenInventory(InputAction.CallbackContext obj)
     {
-        if (!Flags.Instance.IsFlagTrue("hasBackpack")) return;
+        if (!Flags.Instance.IsFlagTrue(FlagEnum.HAS_BACKPACK)) return;
 
         if (ShouldOpenInventory())
         {
