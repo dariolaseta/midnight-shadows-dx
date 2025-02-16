@@ -1213,8 +1213,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c9406bbc14469049bd60344f36f596b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smooth: 15
-  swayMultiplier: 6
+  smooth: 10
+  swayMultiplier: 0.5
+  lookActionReference: {fileID: -5353151513122938822, guid: ad07a5bb4bf604a42aaf97a9f60d0091,
+    type: 3}
 --- !u!114 &5564525344965577971
 MonoBehaviour:
   m_ObjectHideFlags: 0
