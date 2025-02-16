@@ -17,6 +17,14 @@ public class ItemBehavior : MonoBehaviour, IInteractable
 
     public void Interact() 
     {
+        if (!Flags.Instance.IsFlagTrue("hasBackpack"))
+        {
+            DialogueSystem.Instance.SetDialogue("Devo prima prendere il mio zaino");
+            StartCoroutine(DialogueSystem.Instance.ShowDialogue());
+            
+            return;
+        }
+        
         InventoryManager.Instance.AddItem(item);
         
         CheckForEffect(item.Type);
