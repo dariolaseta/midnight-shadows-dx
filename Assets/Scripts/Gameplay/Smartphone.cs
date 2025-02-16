@@ -38,7 +38,7 @@ public class Smartphone : MonoBehaviour
         smartphoneLightAction.action.Disable();
     }
 
-    private void Awake()
+    private void Start()
     {
         anim.gameObject.SetActive(false);
         

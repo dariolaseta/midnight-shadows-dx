@@ -13,7 +13,6 @@ public class ObjectInspection : MonoBehaviour, IInteractable
 
     [SerializeField] Transform inspectPosition;
     
-    [SerializeField] float moveSpeed = 0.2f;
     [SerializeField] float rotationSpeed = 1.0f;
 
     [SerializeField] InputActionReference rotationAction;

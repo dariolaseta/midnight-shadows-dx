@@ -163,6 +163,8 @@ GameObject:
   - component: {fileID: 2525508531679578588}
   - component: {fileID: 8495472534475270155}
   - component: {fileID: 6739451514761884945}
+  - component: {fileID: 5430106193495307721}
+  - component: {fileID: 2810378416822881024}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -408,6 +410,30 @@ MonoBehaviour:
   m_DefaultActionMap: Freeroam
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &5430106193495307721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2943471214548508421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fe1753f16e1a2944bee8f0b7164ed86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2810378416822881024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2943471214548508421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1b085daf1f4485408f220309a867e51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3096885361693038258
 GameObject:
   m_ObjectHideFlags: 0
@@ -872,6 +898,7 @@ GameObject:
   - component: {fileID: 8674899337473289153}
   - component: {fileID: 5456984610178759454}
   - component: {fileID: 5840578433012272416}
+  - component: {fileID: 2633968791026013197}
   m_Layer: 0
   m_Name: Smartphone
   m_TagString: Smartphone
@@ -967,6 +994,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2633968791026013197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5838836356352197789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fe1753f16e1a2944bee8f0b7164ed86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6069832448848127695
 GameObject:
   m_ObjectHideFlags: 0
@@ -1487,6 +1526,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3683647099336280400, guid: 1fc16a3a1ef3cab45b0736d4b9ee298e,
+        type: 3}
+      propertyPath: m_VersionIndex
+      value: 884
+      objectReference: {fileID: 0}
+    - target: {fileID: 5836434832036438121, guid: 1fc16a3a1ef3cab45b0736d4b9ee298e,
+        type: 3}
+      propertyPath: m_VersionIndex
+      value: 787
       objectReference: {fileID: 0}
     - target: {fileID: 8697805866055745734, guid: 1fc16a3a1ef3cab45b0736d4b9ee298e,
         type: 3}

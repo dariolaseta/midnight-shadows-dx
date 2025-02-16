@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public enum GameState { FREEROAM, DIALOG, PAUSE, INVENTORY, CUTSCENE, OBTAIN_ITEM, SMARTPHONE, INSPECTING, DOCUMENT, USE_ITEM, TEST }
 public class GameController : MonoBehaviour
@@ -16,58 +17,62 @@ public class GameController : MonoBehaviour
     [Header("Input actions")]
     [SerializeField] private InputActionReference pauseAction;
 
-    private Animator playerAnim;
-    private Animator[] animators;
-
-    private bool isSmartphoneOn = false;
-
-    private AudioSource[] audioSources;
-
-    private ParticleSystem[] particleSystems;
+    private List<Animator> animators = new List<Animator>();
+    private List<AudioSource> audioSources = new List<AudioSource>();
+    private List<ParticleSystem> particleSystems = new List<ParticleSystem>();
 
     private GameState state = GameState.FREEROAM;
     private GameState prevState;
     public GameState State => state;
 
-    void Awake() {
-
+    void Awake() 
+    {
         CreateInstance();
-
-        ObtainComponents();
     }
 
-    void Start() {
-        
+    void Start() 
+    {
         //DEBUG TODO REMOVE
         MyDebug.Instance.UpdateGameStateText(state.ToString());
         
         DontDestroyOnLoad(gameObject);
     }
 
-    private void OnEnable() {
-
+    private void OnEnable() 
+    {
         EnableInputActions();
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    private void OnDisable() {
+    private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
+    {
+        animators.Clear();
+        audioSources.Clear();
+        particleSystems.Clear();
+    }
 
+    private void OnDisable() 
+    {
         DisableInputActions();
+        
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    private void EnableInputActions() {
-
+    private void EnableInputActions() 
+    {
         pauseAction.action.Enable();
         pauseAction.action.started += HandlePauseMenu;
     }
 
-    private void DisableInputActions() {
-
+    private void DisableInputActions() 
+    {
         pauseAction.action.Disable();
         pauseAction.action.started -= HandlePauseMenu;
     }
 
-    private void CreateInstance() {
-
+    private void CreateInstance() 
+    {
         if (Instance != null && Instance != this) {
 
             Destroy(this);
@@ -76,14 +81,18 @@ public class GameController : MonoBehaviour
 
         Instance = this;
     }
-
-    private void ObtainComponents() {
-
-        playerAnim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
-    }
-
-    public void ChangeState(GameState newState) {
-        
+    
+    public void RegisterAnimator(Animator anim) => animators.Add(anim);
+    public void UnregisterAnimator(Animator anim) => animators.Remove(anim);
+    
+    public void RegisterAudioSource(AudioSource audioSource) => audioSources.Add(audioSource);
+    public void UnregisterAudioSource(AudioSource audioSource) => audioSources.Add(audioSource);
+    
+    public void RegisterParticleSystem(ParticleSystem particle) => particleSystems.Add(particle);
+    public void UnregisterParticleSystem(ParticleSystem particle) => particleSystems.Add(particle);
+    
+    public void ChangeState(GameState newState) 
+    {
         prevState = state;
         state = newState;
         
@@ -91,29 +100,28 @@ public class GameController : MonoBehaviour
         MyDebug.Instance.UpdateGameStateText(state.ToString());
     }
 
-    public void GoToPrevState() {
-        
+    public void GoToPrevState() 
+    {
         state = prevState;
         
         //DEBUG
         MyDebug.Instance.UpdateGameStateText(state.ToString()); //TODO: CHANGE WITH EVENT
     }
 
-    public void EnableCursor() {
-
+    public void EnableCursor() 
+    {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
 
-    public void DisableCursor() {
-
+    public void DisableCursor() 
+    {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
-    private void HandlePauseMenu(InputAction.CallbackContext obj) {
-
-
+    private void HandlePauseMenu(InputAction.CallbackContext obj) 
+    {
         switch(state) {
 
             case GameState.FREEROAM:
@@ -126,8 +134,8 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void Pause() {
-
+    public void Pause() 
+    {
         SetParticleBehavior(true);
 
         SetAnimatorSpeed(0);
@@ -141,8 +149,8 @@ public class GameController : MonoBehaviour
         EnableCursor();
     }
 
-    public void Resume() {
-
+    public void Resume() 
+    {
         GoToPrevState();
 
         pauseScreen.SetActive(false);
@@ -156,12 +164,10 @@ public class GameController : MonoBehaviour
         SetSoundBehavior(false);
     }
 
-    private void SetParticleBehavior(bool isPaused) {
-
-        particleSystems = FindObjectsOfType<ParticleSystem>();
-
-        foreach (ParticleSystem particle in particleSystems) {
-
+    private void SetParticleBehavior(bool isPaused) 
+    {
+        foreach (ParticleSystem particle in particleSystems) 
+        {
             if (!isPaused)
                 particle.Play();
             else
@@ -169,10 +175,9 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void SetSoundBehavior(bool isPaused) {
-
-        audioSources = FindObjectsOfType<AudioSource>();
-
+    public void SetSoundBehavior(bool isPaused) 
+    {
+        //TODO: Escludere suoni UI
         foreach (AudioSource audioSource in audioSources) {
 
             if (!isPaused)
@@ -182,18 +187,11 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private void SetAnimatorSpeed(int value) {
-
-        GetAllAnimators();
-
+    private void SetAnimatorSpeed(int value) 
+    {
         foreach (Animator anim in animators) {
 
             anim.speed = value;
         }
-    }
-
-    private void GetAllAnimators() {
-
-        animators = FindObjectsOfType<Animator>();
-    }
+    } 
 }

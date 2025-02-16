@@ -30,7 +30,6 @@ public class PlayerMovement : MonoBehaviour
     private float startRunningSpeed;
 
     private bool isMoving = false;
-    private bool isPlaying = false;
     private bool isRunning = false;
     private bool isCrouching = false;
 
