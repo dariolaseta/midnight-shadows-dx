@@ -1,13 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Door : MonoBehaviour, IInteractable
 {
-    [SerializeField] bool isOpen = false;
+    [SerializeField] private bool isOpen = false;
+    
+    [Header("Audio")]
+    [SerializeField] private AudioClip openSfx;
+    [SerializeField] private AudioClip closeSfx;
 
-    [SerializeField] AudioClip openDoorSFX;
-    [SerializeField] AudioClip closeDoorSFX;
+    [Header("Animation triggers")] 
+    [SerializeField] private string openAnimationTrigger = "OpenDoor";
+    [SerializeField] private string closeAnimationTrigger = "CloseDoor";
 
     private bool isOpening = false;
 
@@ -33,9 +39,12 @@ public class Door : MonoBehaviour, IInteractable
 
             isOpen = true;
             
-            anim.SetTrigger("OpenDoor");
+            anim.SetTrigger(openAnimationTrigger);
 
-            AudioManager.Instance.PlaySfx(openDoorSFX);
+            if (openSfx != null)
+            {
+                AudioManager.Instance.PlaySfx(openSfx);
+            }
             
             yield return new WaitForSeconds(.7f);
 
@@ -44,9 +53,12 @@ public class Door : MonoBehaviour, IInteractable
 
             isOpen = false;
 
-            anim.SetTrigger("CloseDoor");
+            anim.SetTrigger(closeAnimationTrigger);
 
-            AudioManager.Instance.PlaySfx(closeDoorSFX);
+            if (closeSfx != null)
+            {
+                AudioManager.Instance.PlaySfx(closeSfx);
+            }
 
             yield return new WaitForSeconds(.7f);
 

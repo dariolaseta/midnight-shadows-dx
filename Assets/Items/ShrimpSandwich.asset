@@ -10,9 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bba932f62bd239047abe800de1a25167, type: 3}
-  m_Name: Shrimp
+  m_Name: ShrimpSandwich
   m_EditorClassIdentifier: 
-  itemName: Gamberetto
-  itemDescription: Gamberettino
-  itemImage: {fileID: 21300000, guid: 6e755b8871a93ef4abd7e551e18f4280, type: 3}
-  quantity: 0
+  itemName: Sandwich ai gamberetti
+  itemDescription: Il mio panino preferito.
+  value: 0
+  itemImage: {fileID: 21300000, guid: 70623e896f368e642972fc3a483f5082, type: 3}
+  model: {fileID: 919132149155446097, guid: 17a34613b985e804f969ac79b9255fb6, type: 3}
+  itemType: 0
