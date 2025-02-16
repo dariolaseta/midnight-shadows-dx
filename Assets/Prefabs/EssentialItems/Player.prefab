@@ -1138,6 +1138,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8168898845001623200}
   - component: {fileID: 4389165559432147275}
+  - component: {fileID: 5564525344965577971}
   m_Layer: 0
   m_Name: ItemHolder
   m_TagString: Untagged
@@ -1175,6 +1176,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smooth: 15
   swayMultiplier: 6
+--- !u!114 &5564525344965577971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7609522422295897055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6e6706dc6a4e004889d860c8064b56f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smartphoneAction: {fileID: 3013377100901321961, guid: ad07a5bb4bf604a42aaf97a9f60d0091,
+    type: 3}
+  smartphoneLightAction: {fileID: 7131654952965565067, guid: ad07a5bb4bf604a42aaf97a9f60d0091,
+    type: 3}
+  anim: {fileID: 5840578433012272416}
+  smartphoneLight: {fileID: 776720131083830964}
+  smartphoneOnTrigger: ON
+  smartphoneOffTrigger: Close
 --- !u!1 &8362262127472537275
 GameObject:
   m_ObjectHideFlags: 0

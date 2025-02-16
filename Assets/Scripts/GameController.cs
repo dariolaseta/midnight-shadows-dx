@@ -14,14 +14,9 @@ public class GameController : MonoBehaviour
     [SerializeField] private GameObject pauseScreen;
     
     [Header("Input actions")]
-    [SerializeField] private InputActionReference smartphoneAction;
-    [SerializeField] private InputActionReference smartphoneLightAction;
     [SerializeField] private InputActionReference pauseAction;
 
-    private Light smartphoneLight;
-
     private Animator playerAnim;
-    private Animator smartphoneAnim;
     private Animator[] animators;
 
     private bool isSmartphoneOn = false;
@@ -61,23 +56,11 @@ public class GameController : MonoBehaviour
 
     private void EnableInputActions() {
 
-        smartphoneAction.action.Enable();
-        smartphoneAction.action.started += SmartphoneBeheavior;
-
-        smartphoneLightAction.action.Enable();
-        smartphoneLightAction.action.started += SwitchSmartphoneLightOn;
-
         pauseAction.action.Enable();
         pauseAction.action.started += HandlePauseMenu;
     }
 
     private void DisableInputActions() {
-
-        smartphoneAction.action.Disable();
-        smartphoneAction.action.started -= SmartphoneBeheavior;
-
-        smartphoneLightAction.action.Disable();
-        smartphoneLightAction.action.started -= SwitchSmartphoneLightOn;
 
         pauseAction.action.Disable();
         pauseAction.action.started -= HandlePauseMenu;
@@ -97,10 +80,6 @@ public class GameController : MonoBehaviour
     private void ObtainComponents() {
 
         playerAnim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
-        smartphoneAnim = GameObject.FindGameObjectWithTag("Smartphone").GetComponent<Animator>();
-        smartphoneLight = smartphoneAnim.GetComponentInChildren<Light>();
-        smartphoneLight.enabled = false;
-        smartphoneAnim.gameObject.SetActive(false);
     }
 
     public void ChangeState(GameState newState) {
@@ -118,35 +97,6 @@ public class GameController : MonoBehaviour
         
         //DEBUG
         MyDebug.Instance.UpdateGameStateText(state.ToString()); //TODO: CHANGE WITH EVENT
-    }
-
-    private void SmartphoneBeheavior(InputAction.CallbackContext obj) 
-    {
-        // TODO: MOVE TO SMARTPHONE SCRIPT        
-        if (!Flags.Instance.IsFlagTrue(FlagEnum.HAS_SMARTPHONE)) return;
-
-        if (state == GameState.FREEROAM && Flags.Instance.IsFlagTrue(FlagEnum.HAS_SMARTPHONE) && !isSmartphoneOn) {
-
-            smartphoneAnim.gameObject.SetActive(true);
-
-            smartphoneAnim.SetTrigger("ON");
-
-            isSmartphoneOn = true;
-        } else if (state == GameState.FREEROAM && Flags.Instance.IsFlagTrue(FlagEnum.HAS_SMARTPHONE) && isSmartphoneOn) {
-            
-            smartphoneLight.enabled = false;
-            smartphoneAnim.SetTrigger("Close");
-
-            isSmartphoneOn = false;
-        }
-    }
-
-    private void SwitchSmartphoneLightOn(InputAction.CallbackContext obj) {
-
-        if (isSmartphoneOn && state == GameState.FREEROAM) {
-
-            smartphoneLight.enabled = !smartphoneLight.enabled;
-        }
     }
 
     public void EnableCursor() {
