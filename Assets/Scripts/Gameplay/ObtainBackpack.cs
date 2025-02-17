@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class ObtainBackpack : MonoBehaviour, IInteractable
 {
-    [SerializeField] GameObject playerBackPack;
-
-    [SerializeField] Items item;
+    [SerializeField] private Items item;
 
     public void Interact() {
         
         Flags.Instance.SetFlags(FlagEnum.HAS_BACKPACK, true);
-
-        playerBackPack.SetActive(true);
 
         //TODO: Add tutorial
 
