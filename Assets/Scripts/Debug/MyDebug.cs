@@ -9,7 +9,7 @@ public class MyDebug : MonoBehaviour
     public static MyDebug Instance { get; private set; }
     
     [Header("Version")]
-    [SerializeField] TMP_Text versionTxt;
+    [SerializeField] private TMP_Text versionTxt;
 
     private const string BuildStatus = "Alpha v.";
     
@@ -22,8 +22,8 @@ public class MyDebug : MonoBehaviour
     
     private void Awake()
     {
-        if (Instance != null && Instance != this) {
-
+        if (Instance != null && Instance != this) 
+        {
             Destroy(this);
             return;
         }
@@ -57,9 +57,9 @@ public class MyDebug : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.L))
         {
-            foreach (Achievement achievement in achievements)
+            foreach (Achievement achvmnt in achievements)
             {
-                PlayerPrefs.SetInt(achievement.AchievementID.ToString(), 1);
+                PlayerPrefs.SetInt(achvmnt.AchievementID.ToString(), 1);
                 PlayerPrefs.Save();
             }
             

@@ -11,13 +11,13 @@ public class ScreenshotManager : MonoBehaviour
 
     [SerializeField] string screenshotName;
 
-    void Start() {
-
+    void Start() 
+    {
         TakeScreenshot(desktopPath + "/" + screenshotName + ".png");
     }
 
-    private void TakeScreenshot(string path) {
-
+    private void TakeScreenshot(string path) 
+    {
         if (mainCamera == null) mainCamera = GetComponent<Camera>();
 
         RenderTexture rt = new RenderTexture(256, 256, 24);
