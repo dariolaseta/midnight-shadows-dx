@@ -2,19 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OpenHallwayDoor : MonoBehaviour, IInteractable
+public class InteractablePuzzle : MonoBehaviour, IInteractable
 {
     [Header("Required Item")] 
     [SerializeField] private Items requiredItem;
     
     [Header("Audio")]
     [SerializeField] private AudioClip successSound;
+    
+    [Header("Text")]
+    [TextArea(3, 10)]
+    [SerializeField] private string baseDialogue;
 
     public void Interact()
     {
         if (!Flags.Instance.IsFlagTrue(FlagEnum.HAS_BACKPACK))
         {
-            DialogueSystem.Instance.SetDialogue("Non si apre. Dove ho lasciato la chiave?");
+            DialogueSystem.Instance.SetDialogue(baseDialogue);
             StartCoroutine(DialogueSystem.Instance.ShowDialogue());
             
             return;
@@ -24,13 +28,13 @@ public class OpenHallwayDoor : MonoBehaviour, IInteractable
             requiredItem,
             (success) =>
             {
-                if (success) OpenDoor();
+                if (success) Success();
                 else ShowWrongItemMessage();
             }
         );
     }
 
-    private void OpenDoor()
+    private void Success()
     {
         if (successSound)
             AudioManager.Instance.PlaySfx(successSound);
