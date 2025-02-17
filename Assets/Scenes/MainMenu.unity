@@ -3256,13 +3256,10 @@ PrefabInstance:
       objectReference: {fileID: 610746204}
     m_RemovedComponents:
     - {fileID: 1255086211182725154, guid: 329168e30772f0b4595cd1ea08b0f3af, type: 3}
+    - {fileID: 3439680247275806827, guid: 329168e30772f0b4595cd1ea08b0f3af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 158933976109935272, guid: 329168e30772f0b4595cd1ea08b0f3af,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 368409015}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 329168e30772f0b4595cd1ea08b0f3af, type: 3}
 --- !u!4 &368409013 stripped
 Transform:
@@ -3270,24 +3267,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 368409012}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &368409014 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 158933976109935272, guid: 329168e30772f0b4595cd1ea08b0f3af,
-    type: 3}
-  m_PrefabInstance: {fileID: 368409012}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &368409015
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 368409014}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fe1753f16e1a2944bee8f0b7164ed86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &373771966
 GameObject:
   m_ObjectHideFlags: 0
@@ -10084,13 +10063,10 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 123a5a31483fd8d4a90fe5606c8191a7, type: 2}
     m_RemovedComponents:
     - {fileID: 5210100104721289622, guid: 18c15850e75cf024f92ebce1215b0e3b, type: 3}
+    - {fileID: 7482860165995476430, guid: 18c15850e75cf024f92ebce1215b0e3b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3495375234221858191, guid: 18c15850e75cf024f92ebce1215b0e3b,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1203923281}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18c15850e75cf024f92ebce1215b0e3b, type: 3}
 --- !u!4 &1203923279 stripped
 Transform:
@@ -10098,24 +10074,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1203923278}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1203923280 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3495375234221858191, guid: 18c15850e75cf024f92ebce1215b0e3b,
-    type: 3}
-  m_PrefabInstance: {fileID: 1203923278}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1203923281
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1203923280}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fe1753f16e1a2944bee8f0b7164ed86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1205841054
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11231,8 +11189,6 @@ GameObject:
   - component: {fileID: 1369526954}
   - component: {fileID: 1369526959}
   - component: {fileID: 1369526958}
-  - component: {fileID: 1369526956}
-  - component: {fileID: 1369526955}
   m_Layer: 0
   m_Name: nightshelf v3
   m_TagString: Untagged
@@ -11259,39 +11215,6 @@ Transform:
   - {fileID: 1993139998}
   m_Father: {fileID: 331507159}
   m_LocalEulerAnglesHint: {x: -89.98, y: -90, z: 0}
---- !u!114 &1369526955
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1369526953}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fe1753f16e1a2944bee8f0b7164ed86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!95 &1369526956
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1369526953}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4b4cb89dcdef1ba49b33288af5cc56df, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!23 &1369526958
 MeshRenderer:
   m_ObjectHideFlags: 0
