@@ -19,24 +19,24 @@ public class Door : MonoBehaviour, IInteractable
 
     private Animator anim;
 
-    void Awake() {
-        
+    void Awake() 
+    {
         ObtainComponents();
     }
 
-    public void Interact() {
-
+    public void Interact() 
+    {
         StartCoroutine(DoorBehaviour());
     }
 
-    private IEnumerator DoorBehaviour() {
-
+    private IEnumerator DoorBehaviour() 
+    {
         if (isOpening) yield break;
 
         isOpening = true;
 
-        if (!isOpen) {
-
+        if (!isOpen) 
+        {
             isOpen = true;
             
             anim.SetTrigger(openAnimationTrigger);
@@ -49,8 +49,8 @@ public class Door : MonoBehaviour, IInteractable
             yield return new WaitForSeconds(.7f);
 
             isOpening = false;
-        } else {
-
+        } else 
+        {
             isOpen = false;
 
             anim.SetTrigger(closeAnimationTrigger);
@@ -66,8 +66,8 @@ public class Door : MonoBehaviour, IInteractable
         }
     }
 
-    private void ObtainComponents() {
-
+    private void ObtainComponents() 
+    {
         anim = GetComponent<Animator>();
     }
 }
