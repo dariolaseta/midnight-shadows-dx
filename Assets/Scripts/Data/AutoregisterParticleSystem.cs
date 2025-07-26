@@ -10,13 +10,16 @@ public class AutoregisterParticleSystem : MonoBehaviour
     void OnEnable() => StartCoroutine(RegisterWhenReady());
     void OnDisable() => GameController.Instance.UnregisterParticleSystem(ps);
     
+    // TODO ASYNC
     private IEnumerator RegisterWhenReady()
         {
             while (GameController.Instance == null)
             {
-                yield return null;   
+                Debug.Log("[AutoregisterPartycleSystem] GameController.Instance is null");
+                yield return null;
             }
             
+            Debug.Log("[AutoregisterPartycleSystem] PartycleSystem registered");
             GameController.Instance.RegisterParticleSystem(ps);
         }
 }

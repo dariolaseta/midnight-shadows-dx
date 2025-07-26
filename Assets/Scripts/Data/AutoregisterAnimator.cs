@@ -10,13 +10,16 @@ public class AutoregisterAnimator : MonoBehaviour
     void OnEnable() => StartCoroutine(RegisterWhenReady());
     void OnDisable() => GameController.Instance.UnregisterAnimator(animator);
 
+    // TODO ASYNC
     private IEnumerator RegisterWhenReady()
     {
         while (GameController.Instance == null)
         {
-            yield return null;   
+            Debug.Log("[AutoregisterAnimator] GameController.Instance is null");
+            yield return null;
         }
         
+        Debug.Log("[AutoregisterAnimator] animator registered");
         GameController.Instance.RegisterAnimator(animator);
     }
 }

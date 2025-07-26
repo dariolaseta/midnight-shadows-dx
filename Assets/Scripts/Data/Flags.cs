@@ -8,7 +8,7 @@ public class Flags : MonoBehaviour
 {
     public static Flags Instance { get; private set; }
 
-    private Dictionary<string, bool> flags = new Dictionary<string, bool>();
+    private Dictionary<FlagEnum, bool> flags = new Dictionary<FlagEnum, bool>();
 
     void Awake() {
 
@@ -30,25 +30,25 @@ public class Flags : MonoBehaviour
 
     private void InitializeFlags() {
 
-        foreach (var flag in Enum.GetValues(typeof(FlagEnum)))
+        foreach (FlagEnum flag in Enum.GetValues(typeof(FlagEnum)))
         {
-            flags[flag.ToString()] = false;
+            flags[flag] = false;
         }
     }
 
     public bool GetFlag(FlagEnum flagName) {
 
-        if (flags.ContainsKey(flagName.ToString())) return flags[flagName.ToString()];
+        if (flags.ContainsKey(flagName)) return flags[flagName];
         else return false;
     }
 
     public void SetFlags(FlagEnum flagName, bool value) {
 
-        if (flags.ContainsKey(flagName.ToString())) flags[flagName.ToString()] = value;
+        if (flags.ContainsKey(flagName)) flags[flagName] = value;
     }
 
     public bool IsFlagTrue(FlagEnum flagName) {
 
-        return flags.ContainsKey(flagName.ToString()) && flags[flagName.ToString()];
+        return flags.ContainsKey(flagName) && flags[flagName];
     }
 }
