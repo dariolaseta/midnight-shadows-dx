@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 53195917512525363}
   - component: {fileID: 8538853746872887170}
   - component: {fileID: 1472583944142783403}
+  - component: {fileID: 5879358916552845365}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameController
@@ -53,6 +54,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   versionTxt: {fileID: 0}
+  achievement: {fileID: 0}
+  achievements: []
+  currentGameStateText: {fileID: 0}
 --- !u!114 &4265112620194406718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,18 +69,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ee0605621c32464388d18185f75914f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryScreen: {fileID: 0}
   pauseScreen: {fileID: 0}
-  inventoryAction: {fileID: -905013568239412088, guid: ad07a5bb4bf604a42aaf97a9f60d0091,
-    type: 3}
-  smartphoneAction: {fileID: 3013377100901321961, guid: ad07a5bb4bf604a42aaf97a9f60d0091,
-    type: 3}
-  smartphoneLightAction: {fileID: 7131654952965565067, guid: ad07a5bb4bf604a42aaf97a9f60d0091,
-    type: 3}
   pauseAction: {fileID: -6511589243379420518, guid: ad07a5bb4bf604a42aaf97a9f60d0091,
     type: 3}
-  openBackPack: {fileID: 8300000, guid: 9519e1ec59742084c80b3eaa21ee4a22, type: 3}
-  closeBackPack: {fileID: 8300000, guid: dd8e8d76b7df69247829aa9f4d8ce51b, type: 3}
 --- !u!114 &1790667325823776393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,3 +169,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inspectCamera: {fileID: 0}
+--- !u!114 &5879358916552845365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8040921950608834604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 752ee00cce758f141be70663c5775e8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

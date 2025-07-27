@@ -16,6 +16,7 @@ public class LockSystem : MonoBehaviour, IInteractable
     [SerializeField] private InputActionReference closeInputAction;
 
     [SerializeField] private TMP_Text[] digitTexts;
+    [SerializeField] private TMP_Text lightHouseCode;
 
     [Header("Configs")]
     [Tooltip("Combinazione corretta, l'ultimo numero dev'essere 2")]
@@ -24,8 +25,6 @@ public class LockSystem : MonoBehaviour, IInteractable
     private int[] currentDigits = new int[3] { 0, 0, 0 };
     
     private BoxCollider boxCollider;
-    
-    private readonly int passcode = 342;
 
     private void Awake()
     {
@@ -35,6 +34,8 @@ public class LockSystem : MonoBehaviour, IInteractable
 
     private void Start()
     {
+        PuzzleGenerator.Instance.GenerateLockCode(correctCombination);
+        lightHouseCode.text = correctCombination[0].ToString();
         UpdateAllDigitsUI();
     }
 
