@@ -1,14 +1,21 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class Note : MonoBehaviour, IInteractable
 {
-    [SerializeField] private GameObject noteObject;
+    [SerializeField] private Image noteObject;
 
     [SerializeField] private InputActionReference closeAction;
+
+    [SerializeField] private TMP_Text noteText;
+    [SerializeField] private TMP_Text noteTitle;
+    
+    [SerializeField] private NoteSO note;
 
     private void Awake()
     {
@@ -32,15 +39,23 @@ public class Note : MonoBehaviour, IInteractable
 
     private void OpenNote()
     {
+        SetNoteText();
+        
         GameController.Instance.ChangeState(GameState.NOTE);
-        noteObject.SetActive(true);
+        noteObject.gameObject.SetActive(true);
     }
 
     private void CloseNote()
     {
         if (GameController.Instance.State != GameState.NOTE) return;
         
-        noteObject.SetActive(false);
+        noteObject.gameObject.SetActive(false);
         GameController.Instance.GoToPrevState();
+    }
+    
+    private void SetNoteText()
+    {
+        noteText.text = note.Text;
+        noteTitle.text = note.Title;
     }
 }

@@ -2029,14 +2029,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Il ricordo del nostro primo viaggio
-
-
-    La nostra portata preferita
-
-
-    Una
-    data importante'
+  m_text: AAA
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 31bda548a29ee2e4f8f1d9334c2670cd, type: 2}
   m_sharedMaterial: {fileID: 1793919239103322770, guid: 31bda548a29ee2e4f8f1d9334c2670cd,
@@ -2072,7 +2065,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
