@@ -18,6 +18,8 @@ public class LockSystem : MonoBehaviour, IInteractable
     [SerializeField] private TMP_Text[] digitTexts;
     [SerializeField] private TMP_Text lightHouseCode;
 
+    [SerializeField] private List<GameObject> objectsToSpawn = new List<GameObject>();
+
     [Header("Configs")]
     [Tooltip("Combinazione corretta, l'ultimo numero dev'essere 2")]
     [SerializeField] private int[] correctCombination = new int[3] { 0, 0, 2 };
@@ -35,6 +37,7 @@ public class LockSystem : MonoBehaviour, IInteractable
     private void Start()
     {
         PuzzleGenerator.Instance.GenerateLockCode(correctCombination);
+        PuzzleGenerator.Instance.SpawnGameObject(objectsToSpawn, correctCombination[1]);
         lightHouseCode.text = correctCombination[0].ToString();
         UpdateAllDigitsUI();
     }

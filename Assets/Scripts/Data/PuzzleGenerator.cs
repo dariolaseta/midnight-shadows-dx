@@ -21,4 +21,18 @@ public class PuzzleGenerator : MonoBehaviour
         combination[0] = Random.Range(0, 10);
         combination[1] = Random.Range(0, 10);
     }
+
+    public void SpawnGameObject(List<GameObject> gameObjects, int count)
+    {
+        if (count > gameObjects.Count)
+        {
+            Debug.LogError("Game object count exceeds number of objects");
+            return;
+        }
+        
+        for (int i = 0; i < count; i++)
+        {
+            gameObjects[i].SetActive(true);
+        }
+    }
 }
