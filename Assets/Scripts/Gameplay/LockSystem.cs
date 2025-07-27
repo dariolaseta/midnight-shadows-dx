@@ -70,7 +70,7 @@ public class LockSystem : MonoBehaviour, IInteractable
         {
             lockImage.gameObject.SetActive(false);
             GameController.Instance.DisableCursor();
-            GameController.Instance.ChangeState(GameState.FREEROAM);
+            GameController.Instance.GoToPrevState();
         }
     }
 
